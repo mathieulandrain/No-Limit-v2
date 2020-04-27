@@ -10,7 +10,7 @@ module.exports = (bot) => {
     bot.user.setActivity(status, { type: "WATCHING" });
   }, 5000);
 
-  let myGuild = bot.guilds.get("683734629945311349");
+  let myGuild = bot.guilds.cache.get("683734629945311349");
   let memberCount = myGuild.memberCount;
   let memberCountChannel = myGuild.channels.get("702666918322241547");
   memberCountChannel.setName(`Nous sommes: ` + memberCount);

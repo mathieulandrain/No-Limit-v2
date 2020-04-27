@@ -62,7 +62,7 @@ bot.on("message", async (message) => {
 bot.on("guildMemberAdd", async (member) => {
   const channel = member.guild.channels.get("683734629949505556");
 
-  let myGuild = bot.guilds.get("683734629945311349");
+  let myGuild = bot.guilds.cache.get("683734629945311349");
   let memberCount = myGuild.memberCount;
   let memberCountChannel = myGuild.channels.get("702666918322241547");
   memberCountChannel.setName(`Nous sommes: ` + memberCount);
@@ -135,7 +135,7 @@ bot.on("guildMemberRemove", (member) => {
     .setFooter(`No Limit - Départ`, bot.user.displayAvatarURL);
   member.guild.channels.get("702665886569594981").sendMessage(removeEmbed);
 
-  let myGuild = bot.guilds.get("683734629945311349");
+  let myGuild = bot.guilds.cache.get("683734629945311349");
   let memberCount = myGuild.memberCount;
   let memberCountChannel = myGuild.channels.get("702666918322241547");
   memberCountChannel.setName(`Nous sommes: ` + memberCount);
