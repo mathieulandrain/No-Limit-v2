@@ -1,0 +1,19 @@
+{
+  "name": "nolimitv2",
+  "version": "2.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mathieu Landrain",
+  "license": "ISC",
+  "dependencies": {
+    "canvas": "^2.6.1",
+    "discord.js": "^12.2.0",
+    "fs": "0.0.1-security",
+    "moment": "^2.24.0",
+    "nodemon": "^2.0.3",
+    "superagent": "^5.2.2"
+  }
+}
