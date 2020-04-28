@@ -18,15 +18,12 @@ module.exports.run = async (bot, message, args) => {
   if (!email)
     return message.channel.send("Vous devez mettre le messages pour l'envoie.");
 
-  let MSG = new Discord.RichEmbed()
-    .setDescription(
-      "VOUS AVEZ UN MESSAGE DU SERVEUR " +
-        ` ${message.guild.name} ` +
-        " | " +
-        `${email}`
-    )
-    .setColor(colours.white);
-
+  let MSG = new Discord.MessageEmbed()
+    .setTitle("Message de la No Limit")
+    .setThumbnail("../assets/logo.jpg")
+    .setColor(colours.green_light)
+    .addField("**Vous avez un message de l'Alliance :**", `${email}`)
+    .setFooter(`Message - No Limit `, bot.user.displayAvatarURL);
   DMember.send(MSG);
 };
 

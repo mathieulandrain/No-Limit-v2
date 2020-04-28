@@ -46,14 +46,14 @@ module.exports.run = async (bot, message, args) => {
   await mutee.addRole(muterole.id).then(() => {
     message.delete();
 
-    let MuteEmbed = new Discord.RichEmbed()
+    let MuteEmbed = new Discord.MessageEmbed()
       .setDescription(
         `TEMPMUTED - Vous avez été tempmute dans le serveur \`${message.guild.name}\` avec comme raison : **${reason} pour une durée de : **${muteTime}.****`
       )
       .setColor(colours.orange);
 
     mutee.send(MuteEmbed).catch((err) => console.log(err));
-    let TempMuteLogEmbed = new Discord.RichEmbed()
+    let TempMuteLogEmbed = new Discord.MessageEmbed()
       .setColor(colours.red_dark)
       .addField(
         "TempMute",
@@ -63,7 +63,7 @@ module.exports.run = async (bot, message, args) => {
     message.channel.send(TempMuteLogEmbed);
   });
 
-  let MuteLogEmbed = new Discord.RichEmbed()
+  let MuteLogEmbed = new Discord.MessageEmbed()
     .setColor(colours.orange)
     .setAuthor(`${message.guild.name} LOG`, message.guild.iconURL)
     .addField("Moderation :", "**TEMPMUTE**")
@@ -78,7 +78,7 @@ module.exports.run = async (bot, message, args) => {
   setTimeout(() => {
     mutee.removeRole(muterole.id);
     message.channel.send(`${mutee.user.tag} n'est plus mute.`);
-    let TempMuteEmbed = new Discord.RichEmbed()
+    let TempMuteEmbed = new Discord.MessageEmbed()
       .setDescription(
         `UNMUTED - Vous avez été unmute dans le serveur \`${message.guild.name}\` avec comme raison : **${reason}.**`
       )

@@ -15,7 +15,7 @@ module.exports.run = async (bot, message, args) => {
   if (kickedUser.hasPermission("MANAGE_MESSAGES")) {
     return message.channel.send("Tu ne peut pas kick cette personne.");
   }
-  let kickEmbed = new Discord.RichEmbed()
+  let kickEmbed = new Discord.MessageEmbed()
     .setDescription("-Kick-")
     .setThumbnail(message.guild.iconURL)
     .setColor(colours.red_light)

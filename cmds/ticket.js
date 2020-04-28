@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 module.exports.run = async (bot, message, args) => {
   message.delete();
 
-  let TicketEmbed = new Discord.RichEmbed()
+  let TicketEmbed = new Discord.MessageEmbed()
     .setColor("#cd3")
     .setAuthor("Support du serveur")
     .setDescription("Pour créer un ticket, appuyez sur la réaction")

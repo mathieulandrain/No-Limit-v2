@@ -3,7 +3,7 @@ const colours = require("../colours.json");
 
 module.exports.run = async (bot, message, args) => {
   let bannedUser = message.guild.member(
-    message.mentions.users.first() || message.guild.members.get(args[0])
+    message.mentions.users.first() || message.guild.members.cache.get(args[0])
   );
   if (!bannedUser) {
     return message.channel.send("**Personne non trouvée.**");
@@ -15,7 +15,7 @@ module.exports.run = async (bot, message, args) => {
   if (bannedUser.hasPermission("MANAGE_MESSAGES")) {
     return message.channel.send("Tu ne peut pas ban cette personne.");
   }
-  let banEmbed = new Discord.RichEmbed()
+  let banEmbed = new Discord.MessageEmbed()
     .setDescription("~Ban~")
     .setThumbnail(bot.user.displayAvatarURL)
     .setColor(colours.red_light)
@@ -31,7 +31,7 @@ module.exports.run = async (bot, message, args) => {
     .addField("Raison", banReason)
     .setFooter(`Ban - No Limit `, bot.user.displayAvatarURL);
 
-  let banChannel = message.guild.channels.find(`name`, "logs");
+  let banChannel = message.guild.channels.cache.get("702012380879650818");
   if (!banChannel) {
     return message.channel.send(
       "Canal 'logs' non trouvé. S'il vous plaît créer le."

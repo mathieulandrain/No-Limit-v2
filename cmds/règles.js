@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 module.exports.run = async (bot, message, args) => {
   message.delete();
   console.log("règles 1");
-  let RèglesEmbed = new Discord.RichEmbed()
+  let RèglesEmbed = new Discord.MessageEmbed()
     .setTitle("Règlement - Alliance No Limit")
     .setThumbnail(message.guild.iconURL)
     .setColor("#2ac075")

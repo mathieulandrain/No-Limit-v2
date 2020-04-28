@@ -10,7 +10,7 @@ module.exports.run = async (bot, message, args) => {
   let messageToBot = args.slice(1).join(" ");
   if (!messageToBot) return message.channel.send("Merci de mettre le message");
 
-  var embedSaying = new Discord.RichEmbed()
+  var embedSaying = new Discord.MessageEmbed()
     .setTitle(":loudspeaker:  Suggestion")
     .setThumbnail(message.author.displayAvatarURL)
     .setColor("#cd3")

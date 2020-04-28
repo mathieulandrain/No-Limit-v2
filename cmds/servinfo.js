@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const colours = require("../colours.json");
 
 module.exports.run = async (bot, message, args) => {
-  let aEmbed = new Discord.RichEmbed()
+  let aEmbed = new Discord.MessageEmbed()
     .setColor(colours.cyan)
     .setTitle("Serveur Info")
     .setThumbnail(message.guild.iconURL)

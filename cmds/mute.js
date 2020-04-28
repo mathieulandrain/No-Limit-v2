@@ -43,21 +43,21 @@ module.exports.run = async (bot, message, args) => {
   mutee.addRole(muterole.id).then(() => {
     message.delete();
 
-    let MuteEmbed = new Discord.RichEmbed()
+    let MuteEmbed = new Discord.MessageEmbed()
       .setDescription(
         `MUTED - Vous avez été mute sur le serveur \`${message.guild.name}\` avec comme raison : **${reason}**`
       )
       .setColor(colours.orange);
 
     mutee.send(MuteEmbed).catch((err) => console.log(err));
-    let MuuteLogEmbed = new Discord.RichEmbed()
+    let MuuteLogEmbed = new Discord.MessageEmbed()
       .setColor(colours.red_dark)
       .addField("Mute", `${mutee.user.tag} à été mute pour **${reason}.**`)
       .setFooter(`No Limit - Mute`, bot.user.displayAvatarURL);
     message.channel.send(MuuteLogEmbed);
   });
 
-  let MuteLogEmbed = new Discord.RichEmbed()
+  let MuteLogEmbed = new Discord.MessageEmbed()
     .setColor(colours.orange)
     .setAuthor(`${message.guild.name} LOG`, message.guild.iconURL)
     .addField("Moderation :", "**MUTE**")

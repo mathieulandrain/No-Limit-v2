@@ -10,7 +10,7 @@ module.exports.run = async (bot, message, args) => {
   //console.log(body.message)
   if (!{ body }) return message.channel.send("Mince! Essai encore");
 
-  let Embed = new Discord.RichEmbed()
+  let Embed = new Discord.MessageEmbed()
     .setColor(colours.green_light)
     .setAuthor(`No Limit DOGS !`, message.guild.iconURL)
     .setImage(body.message)

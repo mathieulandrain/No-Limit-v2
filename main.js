@@ -32,11 +32,11 @@ fs.readdir("./cmds/", (err, files) => {
   });
 });
 bot.on("ready", async () => {
-  let ChannelTicket = bot.channels.get("702666567460061204");
+  let ChannelTicket = bot.channels.cache.get("702055849488810035");
 
   ChannelTicket.bulkDelete(100);
 
-  let TicketEmbed = new Discord.RichEmbed()
+  let TicketEmbed = new Discord.MessageEmbed()
     .setColor("#cd3")
     .setAuthor("Support du serveur")
     .setDescription("Pour créer un ticket, appuyez sur la réaction")
@@ -49,7 +49,7 @@ bot.on("ready", async () => {
 bot.on("message", async (message) => {
   if (message.author.bot) return;
   if (message.channel.type === "dm") return;
-  if (!message.content.startsWith("!")) return;
+  if (!message.content.startsWith(".")) return;
 
   let prefix = config.prefix;
   let messageArray = message.content.split(" ");
@@ -60,16 +60,20 @@ bot.on("message", async (message) => {
   if (commandFile) commandFile.run(bot, message, args);
 });
 bot.on("guildMemberAdd", async (member) => {
-  const channel = member.guild.channels.get("683734629949505556");
+  const channel = member.guild.channels.cache.get("683734629949505556");
 
-  let myGuild = bot.guilds.cache.get("683734629945311349");
+  let myGuild = bot.guilds.cache.get("692564832284704819");
   let memberCount = myGuild.memberCount;
-  let memberCountChannel = myGuild.channels.get("702666918322241547");
+  let memberCountChannel = myGuild.channels.cache.get("702094443515346964");
   memberCountChannel.setName(`Nous sommes: ` + memberCount);
 
   const canvas = Canvas.createCanvas(1024, 450);
   const ctx = canvas.getContext("2d");
   Canvas.registerFont("./assets/airstrike.ttf", { family: "airstrike" });
+  function fontFile(airstrike) {
+    return path.join(__dirname, "./assets", airstrike);
+  }
+
   const background = await Canvas.loadImage("./nl.png");
   ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
@@ -129,23 +133,27 @@ bot.on("guildMemberAdd", async (member) => {
   member.addRole(recrue);
 });
 bot.on("guildMemberRemove", (member) => {
-  let removeEmbed = new Discord.RichEmbed()
+  let removeEmbed = new Discord.MessageEmbed()
     .setDescription(member.user.username + " **nous a quitté**")
     .setColor("RANDOM")
-    .setFooter(`No Limit - Départ`, bot.user.displayAvatarURL);
-  member.guild.channels.get("702665886569594981").sendMessage(removeEmbed);
+    .setFooter(`No Limit - Départ`, bot.user.displayAvatarURL());
+  member.guild.channels.cache.get("702089385595764776").send(removeEmbed);
 
-  let myGuild = bot.guilds.cache.get("683734629945311349");
+  let myGuild = bot.guilds.cache.get("692564832284704819");
   let memberCount = myGuild.memberCount;
-  let memberCountChannel = myGuild.channels.get("702666918322241547");
+  let memberCountChannel = myGuild.channels.cache.get("702094443515346964");
   memberCountChannel.setName(`Nous sommes: ` + memberCount);
 });
 bot.on("messageReactionAdd", (reaction, user) => {
   if (user.bot) return;
   const message = reaction.message;
-  const member = message.guild.members.get(user.id);
-  const STAFF = message.guild.roles.find(`name`, "TICKET");
-  const everyone = message.guild.roles.find(`name`, "@everyone");
+  const member = message.guild.members.cache.get(user.id);
+  const STAFF = message.guild.roles.cache.find(
+    (role) => role.name === "TICKET"
+  );
+  const everyone = message.guild.roles.cache.find(
+    (role) => role.name === "@everyone"
+  );
 
   if (["🎟️", "🔒"].includes(reaction.emoji.name)) {
     switch (reaction.emoji.name) {
@@ -191,7 +199,7 @@ bot.on("messageReactionAdd", (reaction, user) => {
                 READ_MESSAGE_HISTORY: true,
               });
 
-              let embedTicketOpen = new Discord.RichEmbed()
+              let embedTicketOpen = new Discord.MessageEmbed()
                 .setTitle("Bonjour,")
                 .setColor("#cd3")
                 .setDescription("Dîtes vos question / message ici")
@@ -215,7 +223,7 @@ bot.on("messageReactionAdd", (reaction, user) => {
           message.channel.delete();
         }, cdseconds * 1500);
 
-        let embedTicketClose = new Discord.RichEmbed()
+        let embedTicketClose = new Discord.MessageEmbed()
           .setTitle(`Le ticket ${message.channel.name} a été fermer`)
           .setColor("#cd3")
           .setFooter("Ticket Fermer Avertissement", bot.user.displayAvatarURL);
@@ -229,13 +237,13 @@ bot.on("messageReactionAdd", (reaction, user) => {
 });
 bot.on("messageReactionAdd", (messageReaction, user) => {
   const message = messageReaction.message;
-  const member = message.guild.members.get(user.id);
+  const member = message.guild.members.cache.get(user.id);
   if (user.bot) return;
-  const ValidationRoles = message.guild.roles.get("702919919490039901");
+  const ValidationRoles = message.guild.roles.cache.get("702768286328160316");
 
   if (messageReaction.emoji.name === "Validation") {
     console.log("Etape 6");
-    member.addRole(ValidationRoles.id);
+    member.roles.add(ValidationRoles.id);
     member.createDM().then((channel) => {
       channel.send(
         "Vous avez bien validez le règlement, restez attentif pour qu'on puisse vous validez et faire partis des membres ainsi avoir accès a tout le serveur Discord."

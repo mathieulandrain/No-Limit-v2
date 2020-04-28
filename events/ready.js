@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 
 module.exports = (bot) => {
-  console.log(`(NoLimit): En ligne`);
+  console.log(`(NoLimitv2): En ligne`);
 
   let statuses = ["!help", `En ligne sur ${bot.guilds.size} serveurs`];
 
@@ -10,8 +10,8 @@ module.exports = (bot) => {
     bot.user.setActivity(status, { type: "WATCHING" });
   }, 5000);
 
-  let myGuild = bot.guilds.get("683734629945311349");
+  let myGuild = bot.guilds.cache.get("692564832284704819");
   let memberCount = myGuild.memberCount;
-  let memberCountChannel = myGuild.channels.get("702666918322241547");
+  let memberCountChannel = myGuild.channels.cache.get("702094443515346964");
   memberCountChannel.setName(`Nous sommes: ` + memberCount);
 };

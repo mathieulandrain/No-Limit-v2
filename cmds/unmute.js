@@ -22,21 +22,21 @@ module.exports.run = async (bot, message, args) => {
   mutee.removeRole(muterole.id).then(() => {
     message.delete();
 
-    let MuteEmbed = new Discord.RichEmbed()
+    let MuteEmbed = new Discord.MessageEmbed()
       .setDescription(
         `UNMUTED - Vous avez été unmute dans le serveur \`${message.guild.name}\``
       )
       .setColor(colours.green_dark);
 
     mutee.send(MuteEmbed).catch((err) => console.log(err));
-    let UnMuteLogEmbed = new Discord.RichEmbed()
+    let UnMuteLogEmbed = new Discord.MessageEmbed()
       .setColor(colours.green_light)
       .addField("unMute", `${mutee.user.tag} à été unmute.`)
       .setFooter(`No Limit - unMute`, bot.user.displayAvatarURL);
     message.channel.send(UnMuteLogEmbed);
   });
 
-  let MuteLogEmbed = new Discord.RichEmbed()
+  let MuteLogEmbed = new Discord.MessageEmbed()
     .setColor(colours.orange)
     .setAuthor(`${message.guild.name} LOG`, message.guild.iconURL)
     .addField("Moderation :", "**UNMUTE**")

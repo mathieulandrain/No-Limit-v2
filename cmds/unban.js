@@ -22,7 +22,7 @@ module.exports.run = async (bot, message, args) => {
     console.log(e.message);
   }
 
-  let embed = new Discord.RichEmbed()
+  let embed = new Discord.MessageEmbed()
     .setColor(colours.green_dark)
     .setAuthor(`${message.guild.name} LOG`, bot.user.displayAvatarURL)
     .addField("Moderation :", "unban")

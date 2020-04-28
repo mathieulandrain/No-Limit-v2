@@ -9,7 +9,7 @@ module.exports.run = async (bot, message, args) => {
     let command = args[0];
     if (bot.commands.has(command)) {
       command = bot.commands.get(command);
-      var SHembed = new Discord.RichEmbed()
+      var SHembed = new Discord.MessageEmbed()
         .setColor(colours.green_dark)
         .setAuthor(`No Limit`, message.guild.iconURL)
         .setThumbnail(bot.user.displayAvatarURL)
@@ -20,13 +20,13 @@ module.exports.run = async (bot, message, args) => {
 
   if (!args[0]) {
     message.delete();
-    let embed = new Discord.RichEmbed()
+    let embed = new Discord.MessageEmbed()
       .setAuthor(`Commande Help !`, message.guild.iconURL)
       .setColor(colours.green_dark)
       .setDescription(`${message.author.username} Regarde tes MP !`)
       .setFooter(`Commandes Help `, bot.user.displayAvatarURL);
 
-    let Sembed = new Discord.RichEmbed()
+    let Sembed = new Discord.MessageEmbed()
       .setColor(colours.green_dark)
       .setAuthor(`No Limit Help !`, message.guild.iconURL)
       .setThumbnail(bot.user.displayAvatarURL)

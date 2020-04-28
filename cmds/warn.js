@@ -31,7 +31,7 @@ module.exports.run = async (bot, message, args) => {
 
   fs.writeFileSync("./warnings.json", JSON.stringify(warns, reason));
 
-  let warnEmbed = new Discord.RichEmbed()
+  let warnEmbed = new Discord.MessageEmbed()
     .setDescription(
       `WARNING - Vous venez de recevoir un warn du serveur **${message.guild.name}** avec comme raison : **${reason}**`
     )
