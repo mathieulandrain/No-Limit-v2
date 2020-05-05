@@ -16,10 +16,10 @@ module.exports.run = async (bot, message, args) => {
   if (!mutee)
     return message.channel.send("Veuillez mentionner la personne à unmute.");
 
-  let muterole = message.guild.roles.find((r) => r.name === "Muted");
+  let muterole = message.guild.roles.cache.find((r) => r.name === "Muted");
   if (!muterole) return message.channel.send("Le grade `Muted` n'existe pas !");
 
-  mutee.removeRole(muterole.id).then(() => {
+  mutee.roles.remove(muterole.id).then(() => {
     message.delete();
 
     let MuteEmbed = new Discord.MessageEmbed()
@@ -32,19 +32,19 @@ module.exports.run = async (bot, message, args) => {
     let UnMuteLogEmbed = new Discord.MessageEmbed()
       .setColor(colours.green_light)
       .addField("unMute", `${mutee.user.tag} à été unmute.`)
-      .setFooter(`No Limit - unMute`, bot.user.displayAvatarURL);
+      .setFooter(`No Limit - unMute`, bot.user.displayAvatarURL());
     message.channel.send(UnMuteLogEmbed);
   });
 
   let MuteLogEmbed = new Discord.MessageEmbed()
     .setColor(colours.orange)
-    .setAuthor(`${message.guild.name} LOG`, message.guild.iconURL)
+    .setAuthor(`${message.guild.name} LOG`, message.guild.iconURL())
     .addField("Moderation :", "**UNMUTE**")
     .addField("Utilisateur ayant été unmute", mutee.user.username)
     .addField("Utilisateur ayant unmute", message.author.tag)
-    .setFooter(`No Limit `, bot.user.displayAvatarURL);
+    .setFooter(`No Limit `, bot.user.displayAvatarURL());
 
-  let lChannel = message.guild.channels.find((c) => c.name === "logs");
+  let lChannel = message.guild.channels.cache.find((c) => c.name === "logs");
   lChannel.send(MuteLogEmbed);
 };
 

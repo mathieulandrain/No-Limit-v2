@@ -17,7 +17,7 @@ module.exports.run = async (bot, message, args) => {
   }
   let banEmbed = new Discord.MessageEmbed()
     .setDescription("~Ban~")
-    .setThumbnail(bot.user.displayAvatarURL)
+    .setThumbnail(bot.user.displayAvatarURL())
     .setColor(colours.red_light)
     .addField(
       "Cette utilisateur a été ban:",
@@ -29,7 +29,7 @@ module.exports.run = async (bot, message, args) => {
     )
     .addField("Canal", message.channel)
     .addField("Raison", banReason)
-    .setFooter(`Ban - No Limit `, bot.user.displayAvatarURL);
+    .setFooter(`Ban - No Limit `, bot.user.displayAvatarURL());
 
   let banChannel = message.guild.channels.cache.get("702012380879650818");
   if (!banChannel) {

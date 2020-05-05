@@ -12,7 +12,7 @@ module.exports.run = async (bot, message, args) => {
       var SHembed = new Discord.MessageEmbed()
         .setColor(colours.green_dark)
         .setAuthor(`No Limit`, message.guild.iconURL)
-        .setThumbnail(bot.user.displayAvatarURL)
+        .setThumbnail(bot.user.displayAvatarURL())
         .setDescription(`Le prefix du bot est: \`!\`\n\n`);
       message.channel.send(SHembed);
     }
@@ -24,12 +24,12 @@ module.exports.run = async (bot, message, args) => {
       .setAuthor(`Commande Help !`, message.guild.iconURL)
       .setColor(colours.green_dark)
       .setDescription(`${message.author.username} Regarde tes MP !`)
-      .setFooter(`Commandes Help `, bot.user.displayAvatarURL);
+      .setFooter(`Commandes Help `, bot.user.displayAvatarURL());
 
     let Sembed = new Discord.MessageEmbed()
       .setColor(colours.green_dark)
-      .setAuthor(`No Limit Help !`, message.guild.iconURL)
-      .setThumbnail(bot.user.displayAvatarURL)
+      .setAuthor(`No Limit Help !`, message.guild.iconURL())
+      .setThumbnail(bot.user.displayAvatarURL())
       .setTimestamp()
       .setDescription(
         `Ce sont les commandes disponibles pour \`No Limit\` !\nLe prefix du bot est: \`!\` `
@@ -42,8 +42,8 @@ module.exports.run = async (bot, message, args) => {
         "Commandes pour les Admin :",
         "``kick`` ``ban`` ``unban`` ``mute`` ``tempmute`` ``unmute`` ``tempban`` ``warn`` ``say`` ``clear`` ``dm`` ``lock`` ``unlock`` ``ping`` ``uptime``"
       )
-      .setFooter("No Limit", bot.user.displayAvatarURL);
-    message.channel.send(embed).then((m) => m.delete(5000));
+      .setFooter("No Limit", bot.user.displayAvatarURL());
+    message.channel.send(embed).then((m) => m.delete({ timeout: 5000 }));
     message.author.send(Sembed);
   }
 };

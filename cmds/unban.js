@@ -6,7 +6,7 @@ module.exports.run = async (bot, message, args) => {
   if (!message.member.hasPermission(["BAN_MEMBERS", "ADMINISTRATOR"]))
     return message.channel.send("Vous n'avez pas la permission");
 
-  let unbanMember = await bot.fetchUser(args[0]);
+  let unbanMember = await bot.users.fetch(args[0]);
   if (!unbanMember)
     return message.channel.send("La personne à unban est introuvable.");
 
@@ -16,7 +16,7 @@ module.exports.run = async (bot, message, args) => {
     return message.channel.send("Vérifier mes permissions");
 
   try {
-    message.guild.unban(unbanMember, { reason: reason });
+    message.guild.member(unbanMember).unban({ reason: reason });
     message.channel.send(`${unbanMember} à été unban du serveur`);
   } catch (e) {
     console.log(e.message);
@@ -24,7 +24,7 @@ module.exports.run = async (bot, message, args) => {
 
   let embed = new Discord.MessageEmbed()
     .setColor(colours.green_dark)
-    .setAuthor(`${message.guild.name} LOG`, bot.user.displayAvatarURL)
+    .setAuthor(`${message.guild.name} LOG`, bot.user.displayAvatarURL())
     .addField("Moderation :", "unban")
     .addField(
       "Utilisateur ayant été unban :",
@@ -33,9 +33,9 @@ module.exports.run = async (bot, message, args) => {
     .addField("Utilisateur ayant unban :", message.author.username)
     .addField("Raison :", reason)
     .setTimestamp()
-    .setFooter(`unBan - No Limit `, bot.user.displayAvatarURL);
+    .setFooter(`unBan - No Limit `, bot.user.displayAvatarURL());
 
-  let lChannel = message.guild.channels.find((c) => c.name === "logs");
+  let lChannel = message.guild.channels.cache.find((c) => c.name === "logs");
   lChannel.send(embed);
 };
 

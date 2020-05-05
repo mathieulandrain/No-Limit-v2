@@ -12,12 +12,12 @@ module.exports.run = async (bot, message, args) => {
 
   var embedSaying = new Discord.MessageEmbed()
     .setTitle(":loudspeaker:  Suggestion")
-    .setThumbnail(message.author.displayAvatarURL)
+    .setThumbnail(message.author.displayAvatarURL())
     .setColor("#cd3")
     .setDescription(`${messageToBot}`)
     .setFooter(
       `Suggestion faite par ${message.author.username}`,
-      bot.user.displayAvatarURL
+      bot.user.displayAvatarURL()
     );
 
   mChannel.send(embedSaying).then(async (msg) => {

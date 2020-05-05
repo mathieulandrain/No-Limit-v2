@@ -7,9 +7,9 @@ module.exports.run = async (bot, message, args) => {
     let response = choices[Math.floor(Math.random() * choices.length)];
 
     m.edit(
-      `${response}: Bot Latency: \`${ping}\`, API Latency: \`${Math.round(
-        bot.ping
-      )}\``
+      `${response}: Bot Latency: \`${
+        bot.ws.ping
+      }\`, API Latency: \`${Math.round(bot.ws.ping)}\``
     );
   });
 };

@@ -19,7 +19,7 @@ module.exports.run = async (bot, message, args) => {
   let reason = args.slice(1).join(" ");
   if (!reason) reason = "Aucune raison donnée";
 
-  let muterole = message.guild.roles.find((r) => r.name === "Muted");
+  let muterole = message.guild.roles.cache.find((r) => r.name === "Muted");
   if (!muterole) {
     try {
       muterole = await message.guild.createRole({
@@ -40,7 +40,7 @@ module.exports.run = async (bot, message, args) => {
       console.log(e.stack);
     }
   }
-  mutee.addRole(muterole.id).then(() => {
+  mutee.roles.add(muterole.id).then(() => {
     message.delete();
 
     let MuteEmbed = new Discord.MessageEmbed()
@@ -53,19 +53,19 @@ module.exports.run = async (bot, message, args) => {
     let MuuteLogEmbed = new Discord.MessageEmbed()
       .setColor(colours.red_dark)
       .addField("Mute", `${mutee.user.tag} à été mute pour **${reason}.**`)
-      .setFooter(`No Limit - Mute`, bot.user.displayAvatarURL);
+      .setFooter(`No Limit - Mute`, bot.user.displayAvatarURL());
     message.channel.send(MuuteLogEmbed);
   });
 
   let MuteLogEmbed = new Discord.MessageEmbed()
     .setColor(colours.orange)
-    .setAuthor(`${message.guild.name} LOG`, message.guild.iconURL)
+    .setAuthor(`${message.guild.name} LOG`, message.guild.iconURL())
     .addField("Moderation :", "**MUTE**")
     .addField("Utilisateur ayant été mute", mutee.user.username)
     .addField("Utilisateur ayant mute", message.author.tag)
     .addField("Raison", reason);
 
-  let lChannel = message.guild.channels.find((c) => c.name === "logs");
+  let lChannel = message.guild.channels.cache.find((c) => c.name === "logs");
   lChannel.send(MuteLogEmbed);
 };
 

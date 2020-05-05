@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 module.exports = (bot) => {
   console.log(`(NoLimitv2): En ligne`);
 
-  let statuses = ["!help", `En ligne sur ${bot.guilds.size} serveurs`];
+  let statuses = ["!help", `En ligne sur ${bot.guilds.cache.size} serveurs`];
 
   setInterval(function () {
     let status = statuses[Math.floor(Math.random() * statuses.length)];

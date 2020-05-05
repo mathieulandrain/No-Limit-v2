@@ -17,7 +17,7 @@ module.exports.run = async (bot, message, args) => {
   }
   let kickEmbed = new Discord.MessageEmbed()
     .setDescription("-Kick-")
-    .setThumbnail(message.guild.iconURL)
+    .setThumbnail(message.guild.iconURL("png", true))
     .setColor(colours.red_light)
     .addField(
       "Cette utilisateur a été kick:",
@@ -28,10 +28,10 @@ module.exports.run = async (bot, message, args) => {
       `${message.author} (ID: ${message.author.id})`
     )
     .addField("Canal", message.channel)
-    .addField("Raison", kickReason)
-    .setFooter(`Kick - No Limit `, bot.user.displayAvatarURL);
+    .addField("Raison", kickReason ? kickReason : "Aucune raison")
+    .setFooter(`Kick - No Limit `, bot.user.displayAvatarURL("png", true));
 
-  let kickChannel = message.guild.channels.find(`name`, "logs");
+  let kickChannel = message.guild.channels.cache.find((c) => c.name == "logs");
   if (!kickChannel) {
     return message.channel.send(
       "Canal 'logs' non trouvé. S'il vous plaît créer le."

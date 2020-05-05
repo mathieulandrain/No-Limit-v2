@@ -3,19 +3,18 @@ const colours = require("../colours.json");
 const moment = require("moment");
 moment.locale("fr");
 const fs = require("fs");
-let warns = JSON.parse(fs.readFileSync("./warnings.json", "utf8"));
 
 module.exports.run = async (bot, message, args) => {
+  let warns = JSON.parse(fs.readFileSync("./warnings.json", "utf8"));
   let userinfo =
     message.mentions.members.first() ||
     message.guild.members.cache.get(args[0]);
   if (!userinfo)
     return message.channel.send("Veuillez mentionner la personne.");
-  if (!warns[userinfo.user.id])
-    warns[userinfo.user.id] = {
-      warns: 0,
-    };
-  let warnlvl = warns[userinfo.user.id].warns;
+  if (!warns[userinfo.user.id]) {
+    warns[userinfo.user.id] = [{}];
+  }
+  let warnlvl = warns[userinfo.user.id].length;
 
   let zEmbed = new Discord.MessageEmbed()
     .setColor(colours.cyan)

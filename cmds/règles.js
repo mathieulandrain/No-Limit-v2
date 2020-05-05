@@ -5,7 +5,7 @@ module.exports.run = async (bot, message, args) => {
   console.log("règles 1");
   let RèglesEmbed = new Discord.MessageEmbed()
     .setTitle("Règlement - Alliance No Limit")
-    .setThumbnail(message.guild.iconURL)
+    .setThumbnail(message.guild.iconURL())
     .setColor("#2ac075")
     .setDescription(
       "**Règles:**\n" +
@@ -22,7 +22,7 @@ module.exports.run = async (bot, message, args) => {
         ":pushpin: - Utilise Ctrl + P pour voir les messages épinglés.\n\n" +
         ":white_check_mark: Pour valider votre lecture de ce règlement cliquez sur :white_check_mark:."
     )
-    .setFooter(`No Limit - Règlement `, bot.user.displayAvatarURL);
+    .setFooter(`No Limit - Règlement `, bot.user.displayAvatarURL());
   console.log("règles 2");
   message.channel.send(RèglesEmbed).then(async (msg) => {
     msg.react("✅");

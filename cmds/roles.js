@@ -5,7 +5,7 @@ module.exports.run = async (bot, message, args) => {
   console.log("Etape 1");
   let RolesEmbed = new Discord.MessageEmbed()
     .setTitle("Règlement - Alliance No Limit")
-    .setThumbnail(message.guild.iconURL)
+    .setThumbnail(message.guild.iconURL())
     .setColor("#2ac075")
     .setDescription(
       "**Règles:**\n" +
@@ -23,7 +23,7 @@ module.exports.run = async (bot, message, args) => {
         ":white_check_mark: Pour valider votre lecture de ce règlement cliquez sur <:Validation:702767035532312604>.\n" +
         "Vous serez ainsi compter comme personne en cours de validation soit attentif au #Vérification c'est ici qu'on vous contactera pour valider ta candidature. Merci aux membres de ne pas réagir ici."
     )
-    .setFooter(`No Limit - Règlement `, bot.user.displayAvatarURL);
+    .setFooter(`No Limit - Validation `, bot.user.displayAvatarURL());
   console.log("Etape 2");
   message.channel.send(RolesEmbed).then(async (msg) => {
     msg.react("702767035532312604");

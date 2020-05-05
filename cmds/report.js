@@ -9,7 +9,7 @@ module.exports.run = async (bot, message, args) => {
   if (!target)
     return message.channel
       .send("Merci de mentionner un utilisateur")
-      .then((m) => m.delete(5000));
+      .then((m) => m.delete({ timeout: 5000 }));
   let reason = args.slice(1).join(" ");
   if (!reason)
     return message.channel
@@ -18,11 +18,11 @@ module.exports.run = async (bot, message, args) => {
       )
       .then((m) => m.delete(5000));
 
-  let rChannel = message.guild.channels.find((c) => c.name === "report");
+  let rChannel = message.guild.channels.cache.find((c) => c.name === "report");
 
   message.channel
     .send("Votre report à été envoyer au staff, Merci pour votre contribution.")
-    .then((m) => m.delete(5000));
+    .then((m) => m.delete({ timeout: 5000 }));
   rChannel
     .send(
       `**${message.author.tag}** à report **${target.user.tag}** pour la raison : ${reason}.`

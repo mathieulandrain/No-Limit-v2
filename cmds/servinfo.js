@@ -5,13 +5,29 @@ module.exports.run = async (bot, message, args) => {
   let aEmbed = new Discord.MessageEmbed()
     .setColor(colours.cyan)
     .setTitle("Serveur Info")
-    .setThumbnail(message.guild.iconURL)
-    .setAuthor(`${message.guild.name} - Infos`, message.guild.iconURL)
+    .setThumbnail(message.guild.iconURL())
+    .setAuthor(`${message.guild.name} - Infos`, message.guild.iconURL())
     .addField("**Nom du serveur**", `${message.guild.name}`, true)
     .addField("**Propiétaire du serveur**", `${message.guild.owner}`, true)
-    .addField("**Nombre de membres**", `${message.guild.memberCount}`)
-    .addField("**Nombre de rôles**", `${message.guild.roles.size}`, true)
-    .setFooter(`No Limit `, bot.user.displayAvatarURL);
+    .addField(
+      "**Nombre de membres**",
+      `${
+        message.guild.members.cache.filter((m) => !m.user.bot).size
+      } membres dont ${
+        message.guild.members.cache.filter((m) => !m.user.bot).size
+      } humains et ${
+        message.guild.members.cache.filter((m) => m.user.bot).size
+      } bots`
+    )
+    .addField(
+      "**Rôles**",
+      `${message.guild.roles.cache.map((r) => `${r}`)}`,
+      true
+    )
+    .setFooter(
+      `No Limit - Serveur info `,
+      bot.user.displayAvatarURL("png", true)
+    );
   message.channel.send(aEmbed);
 };
 

@@ -20,7 +20,7 @@ module.exports.run = async (bot, message, args) => {
   let reason = args.slice(2).join(" ");
   if (!reason) reason = "Aucune raison donnée";
 
-  let muterole = message.guild.roles.find((r) => r.name === "Muted");
+  let muterole = message.guild.roles.cache.find((r) => r.name === "Muted");
   if (!muterole) {
     try {
       muterole = await message.guild.createRole({
@@ -43,7 +43,7 @@ module.exports.run = async (bot, message, args) => {
   let muteTime = args[1];
   if (!muteTime) return message.channel.send("Spécifier la durée.");
 
-  await mutee.addRole(muterole.id).then(() => {
+  await mutee.roles.add(muterole.id).then(() => {
     message.delete();
 
     let MuteEmbed = new Discord.MessageEmbed()
@@ -59,24 +59,24 @@ module.exports.run = async (bot, message, args) => {
         "TempMute",
         `${mutee.user.tag} à été mute pour **${reason}** pendant **${muteTime}.**`
       )
-      .setFooter(`No Limit - TempMute`, bot.user.displayAvatarURL);
+      .setFooter(`No Limit - TempMute`, bot.user.displayAvatarURL());
     message.channel.send(TempMuteLogEmbed);
   });
 
   let MuteLogEmbed = new Discord.MessageEmbed()
     .setColor(colours.orange)
-    .setAuthor(`${message.guild.name} LOG`, message.guild.iconURL)
+    .setAuthor(`${message.guild.name} LOG`, message.guild.iconURL())
     .addField("Moderation :", "**TEMPMUTE**")
     .addField("Utilisateur ayant été tempmute", mutee.user.username)
     .addField("Utilisateur ayant tempmute", message.author.tag)
     .addField("Raison", reason)
     .addField("Pendant :", muteTime);
 
-  let lChannel = message.guild.channels.find((c) => c.name === "logs");
+  let lChannel = message.guild.channels.cache.find((c) => c.name === "logs");
   lChannel.send(MuteLogEmbed);
 
   setTimeout(() => {
-    mutee.removeRole(muterole.id);
+    mutee.roles.remove(muterole.id);
     message.channel.send(`${mutee.user.tag} n'est plus mute.`);
     let TempMuteEmbed = new Discord.MessageEmbed()
       .setDescription(

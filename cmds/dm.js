@@ -20,10 +20,10 @@ module.exports.run = async (bot, message, args) => {
 
   let MSG = new Discord.MessageEmbed()
     .setTitle("Message de la No Limit")
-    .setThumbnail("../assets/logo.jpg")
+    .setThumbnail(bot.user.displayAvatarURL())
     .setColor(colours.green_light)
     .addField("**Vous avez un message de l'Alliance :**", `${email}`)
-    .setFooter(`Message - No Limit `, bot.user.displayAvatarURL);
+    .setFooter(`Message - No Limit `, bot.user.displayAvatarURL());
   DMember.send(MSG);
 };
 

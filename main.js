@@ -4,7 +4,7 @@ const snekfetch = require("snekfetch");
 const fs = require("fs");
 const superagent = require("superagent");
 const bot = new Discord.Client();
-const config = require("./config.json");
+const { token, prefix } = require("./config.json");
 const colours = require("./colours.json");
 const moment = require("moment");
 moment.locale("fr");
@@ -14,7 +14,7 @@ require("./util/eventHandler")(bot);
 
 bot.commands = new Discord.Collection();
 
-bot.login(config.token);
+bot.login(token);
 
 fs.readdir("./cmds/", (err, files) => {
   if (err) console.log(err);
@@ -31,6 +31,7 @@ fs.readdir("./cmds/", (err, files) => {
     bot.commands.set(props.help.name, props);
   });
 });
+
 bot.on("ready", async () => {
   let ChannelTicket = bot.channels.cache.get("702055849488810035");
 
@@ -40,25 +41,29 @@ bot.on("ready", async () => {
     .setColor("#cd3")
     .setAuthor("Support du serveur")
     .setDescription("Pour créer un ticket, appuyez sur la réaction")
-    .setFooter(`Support du serveur No Limit `, bot.user.displayAvatarURL);
+    .setFooter(
+      `Support du serveur No Limit `,
+      bot.user.displayAvatarURL("png", true)
+    );
 
   ChannelTicket.send(TicketEmbed).then(async (msg) => {
     msg.react("🎟️");
   });
 });
+
 bot.on("message", async (message) => {
   if (message.author.bot) return;
   if (message.channel.type === "dm") return;
-  if (!message.content.startsWith(".")) return;
+  if (!message.content.startsWith(prefix)) return;
 
-  let prefix = config.prefix;
   let messageArray = message.content.split(" ");
   let command = messageArray[0];
   let args = messageArray.slice(1);
 
   let commandFile = bot.commands.get(command.slice(prefix.length));
-  if (commandFile) commandFile.run(bot, message, args);
+  if (commandFile) commandFile.run(bot, message, args, prefix);
 });
+
 bot.on("guildMemberAdd", async (member) => {
   const channel = member.guild.channels.cache.get("683734629949505556");
 
@@ -67,12 +72,11 @@ bot.on("guildMemberAdd", async (member) => {
   let memberCountChannel = myGuild.channels.cache.get("702094443515346964");
   memberCountChannel.setName(`Nous sommes: ` + memberCount);
 
+  const Canvas = require("canvas");
+  Canvas.registerFont("Anton-Regular.ttf", { family: "Anton" });
+
   const canvas = Canvas.createCanvas(1024, 450);
   const ctx = canvas.getContext("2d");
-  Canvas.registerFont("./assets/airstrike.ttf", { family: "airstrike" });
-  function fontFile(airstrike) {
-    return path.join(__dirname, "./assets", airstrike);
-  }
 
   const background = await Canvas.loadImage("./nl.png");
   ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
@@ -85,7 +89,7 @@ bot.on("guildMemberAdd", async (member) => {
   ctx.shadowBlur = 2;
   ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
 
-  ctx.font = "90px airstrike";
+  ctx.font = '90px "Anton"';
   ctx.fillStyle = "#F7FF26";
   ctx.fillText("BIENVENUE", 260, 260);
 
@@ -94,7 +98,7 @@ bot.on("guildMemberAdd", async (member) => {
   ctx.shadowBlur = 2;
   ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
 
-  ctx.font = "60px airstrike";
+  ctx.font = '60px "Anton"';
   ctx.fillStyle = "#0CFAFF";
   ctx.fillText(`@${member.displayName}!`, 290, 320);
 
@@ -103,7 +107,7 @@ bot.on("guildMemberAdd", async (member) => {
   ctx.shadowBlur = 2;
   ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
 
-  ctx.font = "40px airstrike";
+  ctx.font = '40px "Anton"';
   ctx.fillStyle = "#1FFFF2";
   ctx.fillText(`Tu est le ${memberCount} ème soldats !`, 250, 370);
 
@@ -158,45 +162,54 @@ bot.on("messageReactionAdd", (reaction, user) => {
   if (["🎟️", "🔒"].includes(reaction.emoji.name)) {
     switch (reaction.emoji.name) {
       case "🎟️":
-        reaction.remove(user);
+        message.reactions.removeAll().then(() => {
+          message.react("🎟️");
+        });
 
         var TicketList = ["ticket-001", "ticket-002", "ticket-003"];
 
         let result = Math.floor(Math.random() * TicketList.length);
 
-        let categoryID = "702666419044614154";
+        var categoryID = "702049107467829298";
+        if (!bot.channels.cache.get(categoryID)) {
+          if (
+            !bot.channels.cache.find(
+              (c) => c.name == "ticket" && c.type == "category"
+            )
+          ) {
+            message.guild.channels
+              .create("ticket", { type: "category" })
+              .then((c) => (categoryID = c.id));
+          } else {
+            categoryID = bot.channels.cache.find(
+              (c) => c.name == "ticket" && c.type == "category"
+            ).id;
+          }
+        }
 
         var bool = false;
 
         if (bool == true) return;
 
-        message.guild
-          .createChannel(TicketList[result], "text")
+        message.guild.channels
+          .create(TicketList[result], "text")
           .then((createChan) => {
             createChan.setParent(categoryID).then((settedParent) => {
-              settedParent.overwritePermissions(everyone, {
-                READ_MESSAGES: false,
+              settedParent.updateOverwrite(everyone, {
+                VIEW_CHANNEL: false,
               });
 
-              settedParent.overwritePermissions(member, {
+              settedParent.updateOverwrite(member, {
                 SEND_MESSAGES: true,
                 ADD_REACTIONS: true,
                 ATTACH_FILES: true,
-                READ_MESSAGES: true,
+                VIEW_CHANNEL: true,
                 READ_MESSAGE_HISTORY: true,
               });
 
-              settedParent.overwritePermissions(STAFF, {
-                READ_MESSAGES: true,
+              settedParent.updateOverwrite(STAFF, {
+                VIEW_CHANNEL: true,
                 MANAGE_MESSAGES: true,
-              });
-
-              settedParent.overwritePermissions(member, {
-                SEND_MESSAGES: true,
-                ADD_REACTIONS: true,
-                ATTACH_FILES: true,
-                READ_MESSAGES: true,
-                READ_MESSAGE_HISTORY: true,
               });
 
               let embedTicketOpen = new Discord.MessageEmbed()
@@ -205,7 +218,7 @@ bot.on("messageReactionAdd", (reaction, user) => {
                 .setDescription("Dîtes vos question / message ici")
                 .setFooter(
                   `Support du serveur No Limit `,
-                  bot.user.displayAvatarURL
+                  bot.user.displayAvatarURL("png", true)
                 );
 
               settedParent.send(embedTicketOpen).then(async (msg) => {
@@ -226,11 +239,17 @@ bot.on("messageReactionAdd", (reaction, user) => {
         let embedTicketClose = new Discord.MessageEmbed()
           .setTitle(`Le ticket ${message.channel.name} a été fermer`)
           .setColor("#cd3")
-          .setFooter("Ticket Fermer Avertissement", bot.user.displayAvatarURL);
+          .setFooter(
+            "Ticket Fermer Avertissement",
+            bot.user.displayAvatarURL("png", true)
+          );
 
-        let logChannel = message.guild.channels.find("name", "logs");
-
-        logChannel.send(embedTicketClose);
+        let logChannel = message.guild.channels.cache.find(
+          (c) => c.name == "logs"
+        );
+        if (logChannel) {
+          logChannel.send(embedTicketClose);
+        }
         break;
     }
   }
@@ -239,6 +258,7 @@ bot.on("messageReactionAdd", (messageReaction, user) => {
   const message = messageReaction.message;
   const member = message.guild.members.cache.get(user.id);
   if (user.bot) return;
+  if (messageReaction.message.channel.id != "703007693056507924") return;
   const ValidationRoles = message.guild.roles.cache.get("702768286328160316");
 
   if (messageReaction.emoji.name === "Validation") {
@@ -246,7 +266,7 @@ bot.on("messageReactionAdd", (messageReaction, user) => {
     member.roles.add(ValidationRoles.id);
     member.createDM().then((channel) => {
       channel.send(
-        "Vous avez bien validez le règlement, restez attentif pour qu'on puisse vous validez et faire partis des membres ainsi avoir accès a tout le serveur Discord."
+        "Vous avez bien validé le règlement, restez attentif pour qu'on puisse vous valider et faire partie des membres ainsi qu'avoir accès à tout le serveur Discord."
       );
     });
   }
