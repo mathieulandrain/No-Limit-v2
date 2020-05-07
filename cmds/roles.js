@@ -20,13 +20,13 @@ module.exports.run = async (bot, message, args) => {
         ":small_orange_diamond: - Si quelqu'un enfreint ces règles, pingez @ @Commandant.\n" +
         ":small_orange_diamond: - Les Modérateurs auront toujours le dernier mot.\n" +
         ":pushpin: - Utilise Ctrl + P pour voir les messages épinglés.\n\n" +
-        ":white_check_mark: Pour valider votre lecture de ce règlement cliquez sur <:Validation:702767035532312604>.\n" +
+        ":white_check_mark: Pour valider votre lecture de ce règlement cliquez sur <:Validation:702767205137252384>.\n" +
         "Vous serez ainsi compter comme personne en cours de validation soit attentif au #Vérification c'est ici qu'on vous contactera pour valider ta candidature. Merci aux membres de ne pas réagir ici."
     )
     .setFooter(`No Limit - Validation `, bot.user.displayAvatarURL());
   console.log("Etape 2");
   message.channel.send(RolesEmbed).then(async (msg) => {
-    msg.react("702767035532312604");
+    msg.react("702767205137252384");
   });
 };
 

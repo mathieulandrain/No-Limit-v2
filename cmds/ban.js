@@ -31,7 +31,7 @@ module.exports.run = async (bot, message, args) => {
     .addField("Raison", banReason)
     .setFooter(`Ban - No Limit `, bot.user.displayAvatarURL());
 
-  let banChannel = message.guild.channels.cache.get("702012380879650818");
+  let banChannel = message.guild.channels.cache.find((c) => c.name === "logs");
   if (!banChannel) {
     return message.channel.send(
       "Canal 'logs' non trouvé. S'il vous plaît créer le."

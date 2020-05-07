@@ -1,5 +1,4 @@
 const Discord = require("discord.js");
-const Canvas = require("canvas");
 const snekfetch = require("snekfetch");
 const fs = require("fs");
 const superagent = require("superagent");
@@ -33,7 +32,7 @@ fs.readdir("./cmds/", (err, files) => {
 });
 
 bot.on("ready", async () => {
-  let ChannelTicket = bot.channels.cache.get("702055849488810035");
+  let ChannelTicket = bot.channels.cache.get("702666567460061204");
 
   ChannelTicket.bulkDelete(100);
 
@@ -67,85 +66,32 @@ bot.on("message", async (message) => {
 bot.on("guildMemberAdd", async (member) => {
   const channel = member.guild.channels.cache.get("683734629949505556");
 
-  let myGuild = bot.guilds.cache.get("692564832284704819");
+  let myGuild = bot.guilds.cache.get("683734629945311349");
   let memberCount = myGuild.memberCount;
-  let memberCountChannel = myGuild.channels.cache.get("702094443515346964");
+  let memberCountChannel = myGuild.channels.cache.get("702666918322241547");
   memberCountChannel.setName(`Nous sommes: ` + memberCount);
 
-  const Canvas = require("canvas");
-  Canvas.registerFont("Anton-Regular.ttf", { family: "Anton" });
+  let newEmbed = new Discord.MessageEmbed()
+    .setThumbnail(member.user.displayAvatarURL())
+    .setColor("RANDOM")
+    .setDescription(`**Bienvenue à ${member} sur le serveur**`)
+    .addField(`Nous sommes désormais:`, `${memberCount} membres`)
+    .setFooter(`Nouveau - No Limit `, bot.user.displayAvatarURL());
+  member.guild.channels.cache.get("683734629949505556").send(newEmbed);
 
-  const canvas = Canvas.createCanvas(1024, 450);
-  const ctx = canvas.getContext("2d");
-
-  const background = await Canvas.loadImage("./nl.png");
-  ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-
-  ctx.strokeStyle = "#000";
-  ctx.strokeRect(8, 11, 1004, 430);
-
-  ctx.shadowOffsetX = 4;
-  ctx.shadowOffsetY = 4;
-  ctx.shadowBlur = 2;
-  ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
-
-  ctx.font = '90px "Anton"';
-  ctx.fillStyle = "#F7FF26";
-  ctx.fillText("BIENVENUE", 260, 260);
-
-  ctx.shadowOffsetX = 4;
-  ctx.shadowOffsetY = 4;
-  ctx.shadowBlur = 2;
-  ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
-
-  ctx.font = '60px "Anton"';
-  ctx.fillStyle = "#0CFAFF";
-  ctx.fillText(`@${member.displayName}!`, 290, 320);
-
-  ctx.shadowOffsetX = 4;
-  ctx.shadowOffsetY = 4;
-  ctx.shadowBlur = 2;
-  ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
-
-  ctx.font = '40px "Anton"';
-  ctx.fillStyle = "#1FFFF2";
-  ctx.fillText(`Tu est le ${memberCount} ème soldats !`, 250, 370);
-
-  const { body: buffer } = await snekfetch.get(member.user.displayAvatarURL);
-  const avatar = await Canvas.loadImage(buffer);
-  ctx.beginPath();
-
-  ctx.shadowOffsetX = 5;
-  ctx.shadowOffsetY = 5;
-  ctx.shadowBlur = 2;
-  ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
-
-  ctx.arc(502, 118, 75, 0, Math.PI * 2, true);
-  ctx.arc(502, 118, 40, 0, Math.PI * 2, true);
-  ctx.fill("evenodd");
-  ctx.closePath();
-  ctx.clip();
-  ctx.drawImage(avatar, 402, 18, 175, 175);
-
-  const attachement = new Discord.Attachment(
-    canvas.toBuffer(),
-    "welcome-image.png"
-  );
-  channel.send(attachement);
-
-  let recrue = member.guild.roles.get("697182454607511652");
-  member.addRole(recrue);
+  let recrue = member.guild.roles.cache.get("697182454607511652");
+  member.roles.add(recrue);
 });
 bot.on("guildMemberRemove", (member) => {
   let removeEmbed = new Discord.MessageEmbed()
     .setDescription(member.user.username + " **nous a quitté**")
     .setColor("RANDOM")
     .setFooter(`No Limit - Départ`, bot.user.displayAvatarURL());
-  member.guild.channels.cache.get("702089385595764776").send(removeEmbed);
+  member.guild.channels.cache.get("702665886569594981").send(removeEmbed);
 
-  let myGuild = bot.guilds.cache.get("692564832284704819");
+  let myGuild = bot.guilds.cache.get("683734629945311349");
   let memberCount = myGuild.memberCount;
-  let memberCountChannel = myGuild.channels.cache.get("702094443515346964");
+  let memberCountChannel = myGuild.channels.cache.get("702666918322241547");
   memberCountChannel.setName(`Nous sommes: ` + memberCount);
 });
 bot.on("messageReactionAdd", (reaction, user) => {
@@ -170,7 +116,7 @@ bot.on("messageReactionAdd", (reaction, user) => {
 
         let result = Math.floor(Math.random() * TicketList.length);
 
-        var categoryID = "702049107467829298";
+        var categoryID = "702666419044614154";
         if (!bot.channels.cache.get(categoryID)) {
           if (
             !bot.channels.cache.find(
@@ -258,8 +204,8 @@ bot.on("messageReactionAdd", (messageReaction, user) => {
   const message = messageReaction.message;
   const member = message.guild.members.cache.get(user.id);
   if (user.bot) return;
-  if (messageReaction.message.channel.id != "703007693056507924") return;
-  const ValidationRoles = message.guild.roles.cache.get("702768286328160316");
+  if (messageReaction.message.channel.id != "693445781977301023") return;
+  const ValidationRoles = message.guild.roles.cache.get("702919919490039901");
 
   if (messageReaction.emoji.name === "Validation") {
     console.log("Etape 6");

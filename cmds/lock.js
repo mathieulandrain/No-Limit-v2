@@ -1,5 +1,10 @@
 const validateFlag = (f) => f === "true" || f === "false" || f === "null";
-const IGNORED = new Set(["702055849488810035", "704100872182825021"]);
+const IGNORED = new Set([
+  "693445975829905449",
+  "693456041412788235",
+  "702665969931387012",
+  "705890139615789092",
+]);
 
 (module.exports.run = async (bot, message, args) => {
   if (!message.member.hasPermission("MANAGE_CHANNELS"))
