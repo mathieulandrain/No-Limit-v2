@@ -35,6 +35,10 @@ module.exports.run = async (bot, message, args) => {
         .utc(userinfo.user.createdAt)
         .format("dddd Do MMMM YYYY, à HH:mm:ss")
     )
+    .addField(
+      "**Nous a rejoins le :**",
+      moment.utc(userinfo.user.joinedAt).format("dddd Do MMMM YYYY, à HH:mm:ss")
+    )
     .setFooter(`Utilisateur - No Limit `, bot.user.displayAvatarURL());
   message.channel.send(zEmbed);
 };
