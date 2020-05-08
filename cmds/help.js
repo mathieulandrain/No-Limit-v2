@@ -40,7 +40,7 @@ module.exports.run = async (bot, message, args) => {
       )
       .addField(
         "Commandes pour les Admin :",
-        "``kick`` ``ban`` ``unban`` ``mute`` ``tempmute`` ``unmute`` ``tempban`` ``warn`` ``say`` ``clear`` ``dm`` ``lock`` ``ping`` ``uptime`` ``warnings``"
+        "``kick`` ``ban`` ``unban`` ``mute`` ``tempmute`` ``unmute`` ``tempban`` ``warn`` ``say`` ``clear`` ``dm`` ``ping`` ``uptime`` ``warnings``"
       )
       .setFooter("No Limit", bot.user.displayAvatarURL());
     message.channel.send(embed).then((m) => m.delete({ timeout: 5000 }));

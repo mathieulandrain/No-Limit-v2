@@ -5,6 +5,14 @@ moment.locale("fr");
 const fs = require("fs");
 
 module.exports.run = async (bot, message, args) => {
+  let inline = true;
+  let resence = true;
+  const status = {
+    online: "En ligne",
+    idle: "Inactif",
+    dnd: " Ne pas dérenger",
+    offline: " Hors-Ligne/Invisble",
+  };
   let warns = JSON.parse(fs.readFileSync("./warnings.json", "utf8"));
   let userinfo =
     message.mentions.members.first() ||
@@ -28,7 +36,12 @@ module.exports.run = async (bot, message, args) => {
     .addField("**#**", `${userinfo.user.discriminator}`, true)
     .addField("**ID**", `${userinfo.user.id}`)
     .addField("**Nombre de warn reçu**", `${warnlvl}`)
-    .addField("**Status**", `${userinfo.user.presence.status}`, true)
+    .addField(
+      "**Statut :**",
+      `${status[userinfo.user.presence.status]}`,
+      inline,
+      true
+    )
     .addField(
       "**Crée le :**",
       moment
@@ -37,7 +50,27 @@ module.exports.run = async (bot, message, args) => {
     )
     .addField(
       "**Nous a rejoins le :**",
-      moment.utc(userinfo.user.joinedAt).format("dddd Do MMMM YYYY, à HH:mm:ss")
+      moment.utc(userinfo.joinedAt).format("dddd Do MMMM YYYY, à HH:mm:ss")
+    )
+    .addField(
+      "Joue à 🎮 :",
+      `${
+        userinfo.user.presence.activities
+          ? `${userinfo.user.presence.activities.name}`
+          : "❌ Ne joue pas"
+      }`,
+      inline,
+      true
+    )
+    .addField(
+      "**Rôles :**",
+      `${
+        userinfo.roles.cache
+          .filter((r) => r.id !== message.guild.id)
+          .map((roles) => `<@&${roles.id}>`)
+          .join(" **|** ") || "❌ N'a pas de roles !"
+      }`,
+      true
     )
     .setFooter(`Utilisateur - No Limit `, bot.user.displayAvatarURL());
   message.channel.send(zEmbed);
