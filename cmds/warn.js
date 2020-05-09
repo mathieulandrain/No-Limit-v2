@@ -10,7 +10,8 @@ module.exports.run = async (bot, message, args) => {
   if (!message.guild.me.hasPermission("ADMINISTRATOR"))
     return "Merci de m'ajoutez la permission `ADMINISTRATOR` pour utilisez cette commande.";
 
-  let member = message.mentions.users.first();
+  let member =
+    message.mentions.users.first() || message.guild.members.cache.get(args[0]);
   if (!member)
     return message.channel.send("Merci de mentionner un utilisateur");
 
@@ -40,14 +41,14 @@ module.exports.run = async (bot, message, args) => {
     )
     .setColor(colours.orange);
 
-  message.channel.send(`**${member}** a bien été warn pour ${reason}`);
+  message.channel.send(`**${member.id}** a bien été warn pour ${reason}`);
 
   member.createDM().then((channel) => {
     channel.send(warnEmbed);
   });
 
   let warnlvl = warns[member.id].length;
-  message.channel.send(`${member} a maintenant ${warnlvl} warn.`);
+  message.channel.send(`${member.id} a maintenant ${warnlvl} warn.`);
 };
 
 module.exports.help = {

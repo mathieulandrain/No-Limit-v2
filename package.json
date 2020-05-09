@@ -9,6 +9,7 @@
   "author": "Mathieu Landrain",
   "license": "ISC",
   "dependencies": {
+    "chrome-launcher": "^0.13.2",
     "discord.js": "^12.2.0",
     "fs": "0.0.1-security",
     "jsdom": "^16.2.2",
@@ -18,6 +19,6 @@
     "puppeteer": "^3.0.4",
     "snekfetch": "^4.0.4",
     "superagent": "^5.2.2",
-    "utip.io": "^0.1.5"
+    "utip.io": "^0.1.9"
   }
 }

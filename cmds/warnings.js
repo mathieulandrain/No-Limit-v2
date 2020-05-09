@@ -12,7 +12,9 @@ module.exports.run = async (bot, message, args) => {
     return message.channel.send(
       "Vous n'avez pas la permission d'utiliser cette commande"
     );
-  let member = message.mentions.members.first();
+  let member =
+    message.mentions.members.first() ||
+    message.guild.members.cache.get(args[0]);
   if (!member) return message.channel.send("Veuillez mentionner un membre");
   if (!warns[member.id]) {
     warns[member.id] = [

@@ -7,22 +7,31 @@ const fs = require("fs");
 module.exports.run = async (bot, message, args) => {
   let inline = true;
   let resence = true;
+
   const status = {
     online: "En ligne",
     idle: "Inactif",
-    dnd: " Ne pas dérenger",
     offline: " Hors-Ligne/Invisble",
+    dnd: " Ne pas déranger",
   };
   let warns = JSON.parse(fs.readFileSync("./warnings.json", "utf8"));
   let userinfo =
     message.mentions.members.first() ||
     message.guild.members.cache.get(args[0]);
+
   if (!userinfo)
     return message.channel.send("Veuillez mentionner la personne.");
+
   if (!warns[userinfo.user.id]) {
     warns[userinfo.user.id] = [{}];
   }
   let warnlvl = warns[userinfo.user.id].length;
+
+  var act = [];
+  userinfo.user.presence.activities.forEach((activity) => {
+    act.push(`${activity.name} - ${activity.state}`);
+  });
+  console.log(act);
 
   let zEmbed = new Discord.MessageEmbed()
     .setColor(colours.cyan)
@@ -55,8 +64,8 @@ module.exports.run = async (bot, message, args) => {
     .addField(
       "Joue à 🎮 :",
       `${
-        userinfo.user.presence.activities
-          ? `${userinfo.user.presence.activities.name}`
+        userinfo.user.presence.activities.length
+          ? `${act.join("\n")}`
           : "❌ Ne joue pas"
       }`,
       inline,

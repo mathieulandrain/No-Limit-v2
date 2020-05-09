@@ -8,7 +8,7 @@ module.exports.run = async (bot, message, args) => {
   if (!bannedUser) {
     return message.channel.send("**Personne non trouvée.**");
   }
-  let banReason = args.join(" ").slice(22);
+  let banReason = args.join(" ").slice(19);
   if (!message.member.hasPermission("MANAGE_MESSAGES")) {
     return message.channel.send("Tu n'a pas la permission !");
   }
@@ -30,6 +30,16 @@ module.exports.run = async (bot, message, args) => {
     .addField("Canal", message.channel)
     .addField("Raison", banReason)
     .setFooter(`Ban - No Limit `, bot.user.displayAvatarURL());
+
+  let bandmEmbed = new Discord.MessageEmbed()
+    .setDescription(
+      `WARNING - Vous venez d'être ban du serveur **${message.guild.name}** avec comme raison : **${banReason}**`
+    )
+    .setColor(colours.red_dark);
+
+  bannedUser.createDM().then((channel) => {
+    channel.send(bandmEmbed);
+  });
 
   let banChannel = message.guild.channels.cache.find((c) => c.name === "logs");
   if (!banChannel) {

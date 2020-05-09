@@ -36,11 +36,11 @@ module.exports.run = async (bot, message, args) => {
       )
       .addField(
         "Commandes pour les membres :",
-        "``help`` ``servinfo`` ``userinfo`` ``report`` ``userinfo`` ``help`` ``suggest`` ``uptime``"
+        "``help`` ``servinfo`` ``userinfo`` ``report`` ``userinfo`` ``help`` ``suggest`` ``uptime`` ``b2o`` ``clem`` ``oof`` ``mathieu`` ``utip`` ``alexis`` ``tropico`` ``liiafa``"
       )
       .addField(
         "Commandes pour les Admin :",
-        "``kick`` ``ban`` ``unban`` ``mute`` ``tempmute`` ``unmute`` ``tempban`` ``warn`` ``say`` ``clear`` ``dm`` ``ping`` ``uptime`` ``warnings``"
+        "``kick`` ``ban`` ``unban`` ``mute`` ``tempmute`` ``unmute`` ``warn`` ``say`` ``clear`` ``dm`` ``ping`` ``uptime`` ``warnings``"
       )
       .setFooter("No Limit", bot.user.displayAvatarURL());
     message.channel.send(embed).then((m) => m.delete({ timeout: 5000 }));

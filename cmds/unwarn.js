@@ -11,7 +11,8 @@ module.exports.run = async (bot, message, args, prefix) => {
   if (!message.guild.me.hasPermission("ADMINISTRATOR"))
     return "Merci de m'ajoutez la permission `ADMINISTRATOR` pour utilisez cette commande.";
 
-  let member = message.mentions.users.first();
+  let member =
+    message.mentions.users.first() || message.guild.members.cache.get(args[0]);
   if (!member)
     return message.channel.send("Merci de mentionner un utilisateur");
 
@@ -28,7 +29,7 @@ module.exports.run = async (bot, message, args, prefix) => {
 
   fs.writeFileSync("./warnings.json", JSON.stringify(warns));
   message.channel.send(
-    `Le warn numéro ${args[1]} de ${member} a été retiré :white_check_mark:`
+    `Le warn numéro ${args[1]} de ${member.id} a été retiré :white_check_mark:`
   );
 };
 
