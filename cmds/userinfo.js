@@ -19,9 +19,6 @@ module.exports.run = async (bot, message, args) => {
     message.mentions.members.first() ||
     message.guild.members.cache.get(args[0]);
 
-  if (!userinfo)
-    return message.channel.send("Veuillez mentionner la personne.");
-
   if (!warns[userinfo.user.id]) {
     warns[userinfo.user.id] = [{}];
   }
