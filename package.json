@@ -19,6 +19,6 @@
     "puppeteer": "^3.0.4",
     "snekfetch": "^4.0.4",
     "superagent": "^5.2.2",
-    "utip.io": "^0.1.9"
+    "utip.io": "^1.0.5"
   }
 }
