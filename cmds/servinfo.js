@@ -13,9 +13,7 @@ module.exports.run = async (bot, message, args) => {
       "**Nombre de membres**",
       `${
         message.guild.members.cache.filter((m) => !m.user.bot).size
-      } membres dont ${
-        message.guild.members.cache.filter((m) => !m.user.bot).size
-      } humains et ${
+      } membres et ${
         message.guild.members.cache.filter((m) => m.user.bot).size
       } bots`
     )

@@ -67,13 +67,13 @@ bot.on("guildMemberAdd", async (member) => {
   const channel = member.guild.channels.cache.get("683734629949505556");
 
   let myGuild = bot.guilds.cache.get("683734629945311349");
-  let memberCount = myGuild.memberCount;
+  let memberCount = myGuild.members.cache.filter((m) => !m.user.bot).size;
   let memberCountChannel = myGuild.channels.cache.get("702666918322241547");
   memberCountChannel.setName(`Nous sommes: ` + memberCount);
 
   let newEmbed = new Discord.MessageEmbed()
     .setThumbnail(member.user.displayAvatarURL())
-    .setColor("RANDOM")
+    .setColor(colours.green_light)
     .setDescription(`**Bienvenue à ${member} sur le serveur**`)
     .addField(`Nous sommes désormais:`, `${memberCount} membres`)
     .setFooter(`Nouveau - No Limit `, bot.user.displayAvatarURL());
@@ -84,13 +84,14 @@ bot.on("guildMemberAdd", async (member) => {
 });
 bot.on("guildMemberRemove", (member) => {
   let removeEmbed = new Discord.MessageEmbed()
-    .setDescription(member.user.username + " **nous a quitté**")
-    .setColor("RANDOM")
+    .setThumbnail(member.user.displayAvatarURL())
+    .setColor(colours.red_dark)
+    .setDescription(`**${member} nous a quitté...**`)
     .setFooter(`No Limit - Départ`, bot.user.displayAvatarURL());
-  member.guild.channels.cache.get("702665886569594981").send(removeEmbed);
+  member.guild.channels.cache.get("683734629949505556").send(removeEmbed);
 
   let myGuild = bot.guilds.cache.get("683734629945311349");
-  let memberCount = myGuild.memberCount;
+  let memberCount = myGuild.members.cache.filter((m) => !m.user.bot).size;
   let memberCountChannel = myGuild.channels.cache.get("702666918322241547");
   memberCountChannel.setName(`Nous sommes: ` + memberCount);
 });
