@@ -14,7 +14,7 @@ Feel free to add a star ⭐ to the repository to promote the project!
 
 Before **creating an issue**, please ensure that it hasn't already been reported/suggested.   
 And if you have a question, please ask it in the [Discord server](https://discord.gg/WtpXSCq) instead of opening an issue.
-If you wish to contribute to the Atlanta codebase or documentation, feel free to fork the repository and submit a pull request!
+If you wish to contribute to the No Limit codebase or documentation, feel free to fork the repository and submit a pull request!
 
 ## License
 
