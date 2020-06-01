@@ -2,7 +2,7 @@
 
 # No Limit
 
-[![](https://img.shields.io/discord/683734629945311349.svg?logo=discord&colorB=7289DA)](https://discord.atlanta-bot.fr)
+[![](https://img.shields.io/discord/716914717377167370.svg?logo=discord&colorB=7289DA)](https://discord.gg/WtpXSCq)
 [![](https://img.shields.io/badge/discord.js-v12.0.0--dev-blue.svg?logo=npm)](https://github.com/discordjs)
 [![](https://img.shields.io/badge/patreon-donate-orange.svg)](https://www.patreon.com/mathieulandrain)
 
