@@ -5,7 +5,7 @@ module.exports.run = async (bot, message, args) => {
   let addrole = message.guild.member(
     message.mentions.users.first() || message.guild.members.cache.get(args[0])
   );
-  let role = message.guild.roles.cache.find((r) => r.name === args.toString());
+  let role = message.guild.roles.cache.find((r) => r == args[0]);
   if (!message.member.hasPermission("MANAGE_MESSAGES")) {
     return message.channel.send("Tu n'a pas la permission !");
   }
@@ -17,9 +17,6 @@ module.exports.run = async (bot, message, args) => {
       return message.channel.send(
         "Cette personne à déjà ce rôle! Essayez à nouveau!"
       );
-    if (role.permissions.has("KICK_MEMBERS"))
-      return message.channel.send("Cette personne ne peut pas avoir ce rôle!");
-
     message.member.roles
       .add(role)
       .then((m) =>
