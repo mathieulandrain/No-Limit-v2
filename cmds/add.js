@@ -2,17 +2,28 @@ const Discord = require("discord.js");
 const colours = require("../colours.json");
 
 module.exports.run = async (bot, message, args) => {
+  let addrole = message.guild.member(
+    message.mentions.users.first() || message.guild.members.cache.get(args[0])
+  );
   let role = message.guild.roles.cache.find((r) => r.name === args.toString());
+  if (!message.member.hasPermission("MANAGE_MESSAGES")) {
+    return message.channel.send("Tu n'a pas la permission !");
+  }
+  if (!addrole) {
+    return message.channel.send("**Personne non trouvée.**");
+  }
   if (role) {
     if (message.member.roles.cache.has(role.id))
-      return message.channel.send("Vous avez déjà ce rôle! Essayez à nouveau!");
+      return message.channel.send(
+        "Cette personne à déjà ce rôle! Essayez à nouveau!"
+      );
     if (role.permissions.has("KICK_MEMBERS"))
-      return message.channel.send("Vous ne pouvez pas avoir ce rôle!");
+      return message.channel.send("Cette personne ne peut pas avoir ce rôle!");
 
     message.member.roles
       .add(role)
       .then((m) =>
-        message.channel.send(`Vous possédez maintenant le role ${role}.`)
+        message.channel.send(`${addrole} possédez maintenant le role ${role}.`)
       )
       .catch((e) => console.log(e));
   } else {
