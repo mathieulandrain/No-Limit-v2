@@ -22,6 +22,9 @@ module.exports.run = async (bot, message, args) => {
   if (!warns[userinfo.user.id]) {
     warns[userinfo.user.id] = [{}];
   }
+  if (!message.member.hasPermission("MANAGE_MESSAGES")) {
+    return message.channel.send("Tu n'a pas la permission !");
+  }
   let warnlvl = warns[userinfo.user.id].length;
 
   var act = [];
