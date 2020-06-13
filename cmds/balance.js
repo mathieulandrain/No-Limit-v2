@@ -17,7 +17,7 @@ module.exports.run = async (bot, message, args) => {
     .addField("Nous avons récolté :", `**${information}**`)
     .addField(
       "Merci !",
-      `Tout ceux qui on participez envoyez un message au <@&708354922319708250> pour avoir le rôle <@&708258240718307420> quand vous avez regardez **1€50** de PUBS.`
+      `Tout ceux qui on participé envoyez un message au <@&708354922319708250> pour avoir le rôle <@&708258240718307420> quand vous avez regardé **1€50** de PUBS.`
     )
     .setFooter(
       `No Limit - uTip Mathieu `,
