@@ -7,8 +7,8 @@ module.exports.run = async (bot, message, args) => {
     .setTitle("Profile GLR")
     .setThumbnail(message.guild.iconURL())
     .addField(
-      "Pour aller sur le profil de **Zéna-BfD**",
-      "[Clic ici](https://discordapp.com/channels/683734629945311349/717462020240441424/717467301594791957)"
+      "Pour aller sur le profil de",
+      "<@406866549987606540> [clic ici](https://discordapp.com/channels/683734629945311349/717462020240441424/717467301594791957)"
     )
     .setFooter(
       `No Limit - Profil GLR `,
