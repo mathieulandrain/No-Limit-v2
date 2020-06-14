@@ -29,4 +29,8 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
   name: "suggest",
+  aliases: ["s"],
+  category: "misc",
+  description: "Permet de faire une suggestion.",
+  usage: "<command_name> + #suggestion + votre suggestion",
 };
