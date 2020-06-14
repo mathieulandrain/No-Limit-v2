@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const snekfetch = require("snekfetch");
-const fs = require("fs");
+const { readdirSync } = require("fs");
 const superagent = require("superagent");
 const bot = new Discord.Client();
 const { token, prefix } = require("./config.json");
@@ -15,21 +15,37 @@ bot.commands = new Discord.Collection();
 
 bot.login(token);
 
-fs.readdir("./cmds/", (err, files) => {
-  if (err) console.log(err);
+const loadCommands = (dir = "./cmds/") => {
+  readdirSync(dir).forEach((dirs) => {
+    const commands = readdirSync(`${dir}/${dirs}/`).filter((files) =>
+      files.endsWith(".js")
+    );
 
-  let jsfile = files.filter((f) => f.split(".").pop() === "js");
-  if (jsfile.length <= 0) {
-    console.log("Aucune commande trouver.");
-    return;
-  }
-
-  jsfile.forEach((f, i) => {
-    let props = require(`./cmds/${f}`);
-    console.log(`${f} Ok !`);
-    bot.commands.set(props.help.name, props);
+    for (const file of commands) {
+      const getFileName = require(`${dir}/${dirs}/${file}`);
+      bot.commands.set(getFileName.help.name, getFileName);
+      console.log(`Commande chargée: ${getFileName.help.name}`);
+    }
   });
-});
+};
+
+const loadEvents = (dir = "./events/") => {
+  readdirSync(dir).forEach((dirs) => {
+    const events = readdirSync(`${dir}/`).filter((files) =>
+      files.endsWith(".js")
+    );
+
+    for (const event of events) {
+      const evt = require(`${dir}/${event}`);
+      const evtName = event.split(".")[0];
+      bot.on(evtName, evt.bind(null, bot));
+      console.log(`Evenement chargé: ${evtName}`);
+    }
+  });
+};
+
+loadEvents();
+loadCommands();
 
 bot.on("ready", async () => {
   let ChannelTicket = bot.channels.cache.get("702666567460061204");

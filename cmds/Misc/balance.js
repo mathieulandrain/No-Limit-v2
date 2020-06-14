@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const utip = require("utip.io");
-const colours = require("../colours.json");
+const colours = require("../../colours.json");
 
 module.exports.run = async (bot, message, args) => {
   message.channel.send("Chargement des informations... (15 secondes)");

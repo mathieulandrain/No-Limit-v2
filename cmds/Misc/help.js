@@ -1,53 +1,63 @@
-const Discord = require("discord.js");
-const colours = require("../colours.json");
+const { MessageEmbed } = require("discord.js");
+const { PREFIX } = require("../../config.json");
+const { readdirSync } = require("fs");
+const categoryList = readdirSync("./cmds");
 
-module.exports.run = async (bot, message, args) => {
-  if (args[0] == "help")
-    return message.channel.send(`Faut juste ${prefix}help`);
+module.exports.run = (client, message, args) => {
+  if (!args.length) {
+    const embed = new MessageEmbed()
+      .setColor("#36393F")
+      .addField(
+        "Liste des commandes",
+        `Une liste de toutes les sous-catégories disponibles et leurs commandes.\nPour plus d'informations sur une commande, tapez \`${PREFIX}help <command_name>\`.`
+      );
 
-  if (args[0]) {
-    let command = args[0];
-    if (bot.commands.has(command)) {
-      command = bot.commands.get(command);
-      var SHembed = new Discord.MessageEmbed()
-        .setColor(colours.green_dark)
-        .setAuthor(`No Limit`, message.guild.iconURL)
-        .setThumbnail(bot.user.displayAvatarURL())
-        .setDescription(`Le prefix du bot est: \`!\`\n\n`);
-      message.channel.send(SHembed);
+    for (const category of categoryList) {
+      embed.addField(
+        `${category}`,
+        `${client.commands
+          .filter((cat) => cat.help.category === category.toLowerCase())
+          .map((cmd) => cmd.help.name)
+          .join(", ")}`
+      );
     }
-  }
 
-  if (!args[0]) {
-    message.delete();
-    let embed = new Discord.MessageEmbed()
-      .setAuthor(`Commande Help !`, message.guild.iconURL)
-      .setColor(colours.green_dark)
-      .setDescription(`${message.author.username} Regarde tes MP !`)
-      .setFooter(`Commandes Help `, bot.user.displayAvatarURL());
+    return message.channel.send(embed);
+  } else {
+    const command =
+      client.commands.get(args[0]) ||
+      client.commands.find(
+        (cmd) => cmd.help.aliases && cmd.help.aliases.includes(args[0])
+      );
+    console.log(command);
+    if (!command) return message.reply("cette commande n'existe pas!");
 
-    let Sembed = new Discord.MessageEmbed()
-      .setColor(colours.green_dark)
-      .setAuthor(`No Limit Help !`, message.guild.iconURL())
-      .setThumbnail(bot.user.displayAvatarURL())
-      .setTimestamp()
-      .setDescription(
-        `Ce sont les commandes disponibles pour \`No Limit\` !\nLe prefix du bot est: \`!\` `
+    const embed = new MessageEmbed()
+      .setColor("#36393F")
+      .setTitle(`\`${command.help.name}\``)
+      .addField(
+        "Description",
+        `${command.help.description} (cd: ${command.help.cooldown}secs)`
       )
       .addField(
-        "Commandes pour les membres :",
-        "``help`` ``servinfo`` ``userinfo`` ``report`` ``userinfo`` ``help`` ``suggest`` ``uptime`` ``b2o`` ``clem`` ``oof`` ``mathieu`` ``utip`` ``alexis`` ``tropico`` ``liiafa``"
-      )
-      .addField(
-        "Commandes pour les Admin :",
-        "``kick`` ``ban`` ``unban`` ``mute`` ``tempmute`` ``unmute`` ``warn`` ``say`` ``clear`` ``dm`` ``ping`` ``uptime`` ``warnings``"
-      )
-      .setFooter("No Limit", bot.user.displayAvatarURL());
-    message.channel.send(embed).then((m) => m.delete({ timeout: 5000 }));
-    message.author.send(Sembed);
+        "Utilisation",
+        command.help.usage
+          ? `${PREFIX}${command.help.name} ${command.help.usage}`
+          : `${PREFIX}${command.help.name}`,
+        true
+      );
+
+    if (command.help.aliases.length > 1)
+      embed.addField("Alias", `${command.help.aliases.join(", ")}`, true);
+    return message.channel.send(embed);
   }
 };
 
 module.exports.help = {
   name: "help",
+  aliases: ["help"],
+  category: "misc",
+  description:
+    "Renvoie une liste de commandes ou les informations sur une seule!",
+  usage: "<command_name>",
 };

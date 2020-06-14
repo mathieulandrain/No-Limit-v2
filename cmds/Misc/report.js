@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const colours = require("../colours.json");
+const colours = require("../../colours.json");
 
 module.exports.run = async (bot, message, args) => {
   message.delete();
@@ -37,4 +37,8 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
   name: "report",
+  aliases: ["r"],
+  category: "misc",
+  description: "Sert à report une personne",
+  usage: "<!report> @ de la personne à report + la raison",
 };
