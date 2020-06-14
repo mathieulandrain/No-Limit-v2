@@ -35,4 +35,8 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
   name: "addrole",
+  aliases: ["ar"],
+  category: "moderation",
+  description: "Ajoute un rôle.",
+  usage: "<command_name> + @delapersonne + nom du rôle",
 };
