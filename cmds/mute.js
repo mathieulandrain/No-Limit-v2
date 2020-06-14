@@ -12,7 +12,8 @@ module.exports.run = async (bot, message, args) => {
     );
 
   let mutee =
-    message.mentions.members.first() || message.guild.members.get(args[0]);
+    message.mentions.members.first() ||
+    message.guild.members.cache.get(args[0]);
   if (!mutee)
     return message.channel.send("Veuillez mentionner la personne à mute.");
 

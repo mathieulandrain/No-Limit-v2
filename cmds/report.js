@@ -5,7 +5,8 @@ module.exports.run = async (bot, message, args) => {
   message.delete();
 
   let target =
-    message.mentions.members.first() || message.guild.members.get(args[0]);
+    message.mentions.members.first() ||
+    message.guild.members.cache.get(args[0]);
   if (!target)
     return message.channel
       .send("Merci de mentionner un utilisateur")

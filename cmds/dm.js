@@ -8,13 +8,14 @@ module.exports.run = async (bot, message, args) => {
     return message.channel.send("Vous n'avez pas la permission.");
 
   let DMember =
-    message.mentions.members.first() || message.guild.members.get(args[0]);
+    message.mentions.members.first() ||
+    message.guild.members.cache.get(args[0]);
   if (!DMember)
     return message.channel.send(
       "Veuillez mettre l'utilisateur pour envoyer le message"
     );
 
-  let email = args.join(" ").slice(22);
+  let email = args.join(" ").slice(19);
   if (!email)
     return message.channel.send("Vous devez mettre le messages pour l'envoie.");
 
