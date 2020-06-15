@@ -6,7 +6,7 @@ const categoryList = readdirSync("./cmds");
 module.exports.run = (bot, message, args) => {
   if (!args.length) {
     const embed = new MessageEmbed()
-      .setAuthor(`No Limit Help !`, bot.user.displayAvatarURL())
+      .setAuthor(`No Limit | Commandes`, bot.user.displayAvatarURL())
       .setColor("#a1ee33")
       .addField(
         "Liste des commandes",
@@ -27,7 +27,7 @@ module.exports.run = (bot, message, args) => {
             .map((cmd) => cmd.help.name)
             .join(", ")}`
         )
-        .setFooter(`Commandes Help `, bot.user.displayAvatarURL());
+        .setFooter(`No Limit | Commandes `, bot.user.displayAvatarURL());
     }
 
     return message.channel.send(embed);
@@ -52,12 +52,10 @@ module.exports.run = (bot, message, args) => {
           ? `${prefix}${command.help.name} ${command.help.usage}`
           : `${prefix}${command.help.name}`,
         true
-      )
-      .addField("⛓️ - Alias", `${command.help.aliases}`)
-      .setFooter(`Commandes Help `, bot.user.displayAvatarURL());
+      );
 
     if (command.help.aliases.length > 1)
-      embed.addField("Alias", `${command.help.aliases.join(", ")}`, true);
+      embed.addField("⛓️ - Alias", `${command.help.aliases.join(", ")}`, true);
     return message.channel.send(embed);
   }
 };
