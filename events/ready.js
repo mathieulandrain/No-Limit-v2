@@ -42,7 +42,10 @@ bot.login(token);
 module.exports = async (bot) => {
   console.log(`(NoLimitv2): En ligne`);
 
-  let statuses = ["!help", `En ligne sur ${bot.guilds.cache.size} serveurs`];
+  let statuses = [
+    `${prefix}help`,
+    `En ligne sur ${bot.guilds.cache.size} serveurs`,
+  ];
 
   setInterval(function () {
     let status = statuses[Math.floor(Math.random() * statuses.length)];

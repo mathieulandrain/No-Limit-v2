@@ -6,10 +6,11 @@ const categoryList = readdirSync("./cmds");
 module.exports.run = (bot, message, args) => {
   if (!args.length) {
     const embed = new MessageEmbed()
+      .setAuthor(`No Limit Help !`, bot.user.displayAvatarURL())
       .setColor("#a1ee33")
       .addField(
         "Liste des commandes",
-        `Une liste de toutes les sous-catégories disponibles et leurs commandes.\nPour plus d'informations sur une commande, tapez \`${prefix}help <command_name>\`.`
+        `Une liste de toutes les sous-catégories disponibles et leurs commandes.\nPour plus d'informations sur une commande, tapez **${prefix}help <command_name>**.`
       );
 
     for (const category of categoryList) {
@@ -18,13 +19,15 @@ module.exports.run = (bot, message, args) => {
           .filter((cat) => cat.help.category === category.toLowerCase())
           .map((cmd) => cmd.help.name)
       );
-      embed.addField(
-        `${category}`,
-        `${bot.commands
-          .filter((cat) => cat.help.category === category.toLowerCase())
-          .map((cmd) => cmd.help.name)
-          .join(", ")}`
-      );
+      embed
+        .addField(
+          `- ${category}`,
+          `${bot.commands
+            .filter((cat) => cat.help.category === category.toLowerCase())
+            .map((cmd) => cmd.help.name)
+            .join(", ")}`
+        )
+        .setFooter(`Commandes Help `, bot.user.displayAvatarURL());
     }
 
     return message.channel.send(embed);
@@ -38,17 +41,20 @@ module.exports.run = (bot, message, args) => {
     if (!command) return message.reply("cette commande n'existe pas!");
 
     const embed = new MessageEmbed()
+      .setAuthor(`No Limit Help !`, bot.user.displayAvatarURL())
       .setColor("#a1ee33")
-      .setTitle(`\`${command.help.name}\``)
-      .addField("- Description", `${command.help.description}`)
+      .setTitle(`Aide sur la commande: *${command.help.name}*`)
+      .setThumbnail(message.guild.iconURL())
+      .addField("📄 - Description", `${command.help.description}`)
       .addField(
-        "- Utilisation",
+        "⚒️ - Utilisation",
         command.help.usage
           ? `${prefix}${command.help.name} ${command.help.usage}`
           : `${prefix}${command.help.name}`,
         true
       )
-      .addField("- Alias", `${command.help.aliases}`);
+      .addField("⛓️ - Alias", `${command.help.aliases}`)
+      .setFooter(`Commandes Help `, bot.user.displayAvatarURL());
 
     if (command.help.aliases.length > 1)
       embed.addField("Alias", `${command.help.aliases.join(", ")}`, true);
