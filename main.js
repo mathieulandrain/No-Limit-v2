@@ -10,7 +10,6 @@ const { loadCommands, loadEvents } = require("./util/loader");
 moment.locale("fr");
 const cdseconds = 5;
 
-
 bot.commands = new Discord.Collection();
 
 loadCommands(bot);
@@ -85,7 +84,12 @@ bot.on("message", async (message) => {
   let command = messageArray[0];
   let args = messageArray.slice(1);
 
-  let commandFile = bot.commands.get(command.slice(prefix.length));
+  let commandFile =
+    bot.commands.get(command.slice(prefix.length)) ||
+    bot.commands.find(
+      (cmd) => cmd.help.aliases && cmd.help.aliases.includes(prefix.length)
+    );
+  console.log(bot.command);
   if (commandFile) commandFile.run(bot, message, args, prefix);
 });
 
