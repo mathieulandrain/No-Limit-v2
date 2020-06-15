@@ -72,4 +72,8 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
   name: "mute",
+  aliases: ["mute"],
+  category: "moderation",
+  description: "Mute une personne.",
+  usage: "+ @delapersonne + raison",
 };
