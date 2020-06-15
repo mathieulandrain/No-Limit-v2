@@ -41,4 +41,8 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
   name: "unban",
+  aliases: ["unban"],
+  category: "moderation",
+  description: "Unban une personne.",
+  usage: "+ **ID**delapersonne",
 };
