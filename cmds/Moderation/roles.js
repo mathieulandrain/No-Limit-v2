@@ -32,4 +32,8 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
   name: "Validation",
+  aliases: ["valid"],
+  category: "moderation",
+  description: "Met la réaction pour la validation",
+  usage: "",
 };
