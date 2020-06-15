@@ -91,4 +91,8 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
   name: "tempmute",
+  aliases: ["tp"],
+  category: "moderation",
+  description: "TempMute une personne.",
+  usage: "+ @delapersonne + temps (sec) (min) (h) + raison",
 };
