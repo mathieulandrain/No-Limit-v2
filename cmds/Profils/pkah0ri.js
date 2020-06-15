@@ -8,7 +8,7 @@ module.exports.run = async (bot, message, args) => {
     .setThumbnail(message.guild.iconURL())
     .addField(
       "Pour aller sur le profil de",
-      "<@528668997969903656> [clic ici](https://discordapp.com/channels/683734629945311349/717462020240441424/717464539318190131)"
+      "<@496383684757291009> [clic ici](https://discordapp.com/channels/683734629945311349/717462020240441424/721808922956005446)"
     )
     .setFooter(
       `No Limit - Profil GLR `,
@@ -18,5 +18,9 @@ module.exports.run = async (bot, message, args) => {
 };
 
 module.exports.help = {
-  name: `pnaasty`,
+  name: `pkah0ri`,
+  aliases: ["pkahori"],
+  category: "profils",
+  description: "Avoir accès au profil GLR d'un membre",
+  usage: "",
 };
