@@ -15,4 +15,8 @@ module.exports.run = async (bot, message, args) => {
 };
 module.exports.help = {
   name: "ping",
+  aliases: ["pg"],
+  category: "moderation",
+  description: "Connaître la latence",
+  usage: "",
 };
