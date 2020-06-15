@@ -19,4 +19,8 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
   name: `padrion`,
+  aliases: ["padrion"],
+  category: "profils",
+  description: "Ban une personne.",
+  usage: "<command_name> + @delapersonne + raison",
 };
