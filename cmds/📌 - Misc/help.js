@@ -54,8 +54,12 @@ module.exports.run = (bot, message, args) => {
         true
       );
 
-    if (command.help.aliases.length > 1)
-      embed.addField("⛓️ - Alias", `${command.help.aliases.join(", ")}`, true);
+    if (command.help.aliases.length > 0)
+      embed.addField(
+        "⛓️ - Alias",
+        `\`\`${command.help.aliases.join(", ")}\`\``,
+        true
+      );
     return message.channel.send(embed);
   }
 };

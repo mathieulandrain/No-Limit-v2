@@ -87,9 +87,11 @@ bot.on("message", async (message) => {
   let commandFile =
     bot.commands.get(command.slice(prefix.length)) ||
     bot.commands.find(
-      (cmd) => cmd.help.aliases && cmd.help.aliases.includes(prefix.length)
+      (cmd) =>
+        cmd.help.aliases &&
+        cmd.help.aliases.includes(command.slice(prefix.length))
     );
-  console.log(bot.command);
+  console.log(bot.commands);
   if (commandFile) commandFile.run(bot, message, args, prefix);
 });
 
