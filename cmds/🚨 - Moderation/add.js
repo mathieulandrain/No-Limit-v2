@@ -26,7 +26,7 @@ module.exports.run = async (bot, message, args) => {
       .add(role.id)
       .then((m) =>
         message.channel.send(
-          `${addrole} possédez maintenant le role ${role.name}.`
+          `${addrole} posséde maintenant le role ${role.name}.`
         )
       )
       .catch((e) => console.log(e));
