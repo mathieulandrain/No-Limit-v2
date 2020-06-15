@@ -19,4 +19,8 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
   name: `pmathieu`,
+  aliases: ["pmath", "pzeus"],
+  category: "profils",
+  description: "Avoir accès au profil GLR d'un membre",
+  usage: "",
 };
