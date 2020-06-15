@@ -70,5 +70,5 @@ module.exports.help = {
   category: "📌 - misc",
   description:
     "Renvoie une liste de commandes ou les informations sur une seule!",
-  usage: "<command_name>",
+  usage: "",
 };

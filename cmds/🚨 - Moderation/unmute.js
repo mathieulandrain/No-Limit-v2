@@ -38,7 +38,8 @@ module.exports.run = async (bot, message, args) => {
 
   let MuteLogEmbed = new Discord.MessageEmbed()
     .setColor(colours.orange)
-    .setAuthor(`${message.guild.name} LOG`, message.guild.iconURL())
+    .setAuthor(`${message.guild.name} LOG`)
+    .setThumbnail(message.guild.iconURL())
     .addField("Moderation :", "**UNMUTE**")
     .addField("Utilisateur ayant été unmute", mutee.user.username)
     .addField("Utilisateur ayant unmute", message.author.tag)

@@ -60,7 +60,8 @@ module.exports.run = async (bot, message, args) => {
 
   let MuteLogEmbed = new Discord.MessageEmbed()
     .setColor(colours.orange)
-    .setAuthor(`${message.guild.name} LOG`, message.guild.iconURL())
+    .setAuthor(`${message.guild.name} LOG`)
+    .setThumbnail(message.guild.iconURL())
     .addField("Moderation :", "**MUTE**")
     .addField("Utilisateur ayant été mute", mutee.user.username)
     .addField("Utilisateur ayant mute", message.author.tag)

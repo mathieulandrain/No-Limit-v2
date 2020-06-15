@@ -56,5 +56,5 @@ module.exports.help = {
   aliases: ["ban"],
   category: "🚨 - moderation",
   description: "Ban une personne.",
-  usage: "<command_name> + @delapersonne + raison",
+  usage: " + @delapersonne + raison",
 };

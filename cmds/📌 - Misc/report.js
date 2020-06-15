@@ -40,5 +40,5 @@ module.exports.help = {
   aliases: ["r"],
   category: "📌 - misc",
   description: "Sert à report une personne",
-  usage: "<!report> @ de la personne à report + la raison",
+  usage: " @ de la personne à report + la raison",
 };

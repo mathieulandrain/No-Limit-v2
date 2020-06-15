@@ -32,5 +32,5 @@ module.exports.help = {
   aliases: ["s"],
   category: "📌 - misc",
   description: "Permet de faire une suggestion.",
-  usage: "<command_name> + #suggestion + votre suggestion",
+  usage: " + #suggestion + votre suggestion",
 };

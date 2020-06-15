@@ -38,5 +38,5 @@ module.exports.help = {
   aliases: ["ar"],
   category: "🚨 - moderation",
   description: "Ajoute un rôle.",
-  usage: "<command_name> + @delapersonne + nom du rôle",
+  usage: " + @delapersonne + nom du rôle",
 };

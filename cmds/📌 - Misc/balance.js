@@ -34,5 +34,5 @@ module.exports.help = {
   aliases: ["bu"],
   category: "📌- misc",
   description: "Informe de la somme récolté sur uTip",
-  usage: "<command_name>",
+  usage: "",
 };

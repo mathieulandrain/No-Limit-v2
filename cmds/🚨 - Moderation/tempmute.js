@@ -66,7 +66,8 @@ module.exports.run = async (bot, message, args) => {
 
   let MuteLogEmbed = new Discord.MessageEmbed()
     .setColor(colours.orange)
-    .setAuthor(`${message.guild.name} LOG`, message.guild.iconURL())
+    .setAuthor(`${message.guild.name} LOG`)
+    .setThumbnail(message.guild.iconURL())
     .addField("Moderation :", "**TEMPMUTE**")
     .addField("Utilisateur ayant été tempmute", mutee.user.username)
     .addField("Utilisateur ayant tempmute", message.author.tag)
@@ -94,5 +95,5 @@ module.exports.help = {
   aliases: ["tp"],
   category: "🚨 - moderation",
   description: "TempMute une personne.",
-  usage: "+ @delapersonne + temps (sec) (min) (h) + raison",
+  usage: "+ @delapersonne + temps (sec) (m) (h) + raison",
 };
