@@ -35,4 +35,9 @@ module.exports.run = async (bot, message, args, prefix) => {
 
 module.exports.help = {
   name: "unwarn",
+  aliases: ["uw"],
+  category: "moderation",
+  description: "Unwarn une personne.",
+  usage:
+    "+ @delapersonne + numéro du warn à supprimer (voir avec la commande warnings)",
 };
