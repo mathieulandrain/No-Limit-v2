@@ -87,4 +87,8 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
   name: "userinfo",
+  aliases: ["ui"],
+  category: "moderation",
+  description: "Connaître les infos d'une personne.",
+  usage: "+ @delapersonne",
 };
