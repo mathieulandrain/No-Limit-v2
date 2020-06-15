@@ -6,46 +6,17 @@ const bot = new Discord.Client();
 const { token, prefix } = require("./config.json");
 const colours = require("./colours.json");
 const moment = require("moment");
+const { loadCommands, loadEvents } = require("./util/loader");
 moment.locale("fr");
 const cdseconds = 5;
 
-require("./util/eventHandler")(bot);
 
 bot.commands = new Discord.Collection();
 
+loadCommands(bot);
+loadEvents(bot);
+
 bot.login(token);
-
-const loadCommands = (dir = "./cmds/") => {
-  readdirSync(dir).forEach((dirs) => {
-    const commands = readdirSync(`${dir}/${dirs}/`).filter((files) =>
-      files.endsWith(".js")
-    );
-
-    for (const file of commands) {
-      const getFileName = require(`${dir}/${dirs}/${file}`);
-      bot.commands.set(getFileName.help.name, getFileName);
-      console.log(`Commande chargée: ${getFileName.help.name}`);
-    }
-  });
-};
-
-const loadEvents = (dir = "./events/") => {
-  readdirSync(dir).forEach((dirs) => {
-    const events = readdirSync(`${dir}/`).filter((files) =>
-      files.endsWith(".js")
-    );
-
-    for (const event of events) {
-      const evt = require(`${dir}/${event}`);
-      const evtName = event.split(".")[0];
-      bot.on(evtName, evt.bind(null, bot));
-      console.log(`Evenement chargé: ${evtName}`);
-    }
-  });
-};
-
-loadEvents();
-loadCommands();
 
 bot.on("ready", async () => {
   let ChannelTicket = bot.channels.cache.get("702666567460061204");
