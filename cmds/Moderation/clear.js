@@ -17,6 +17,6 @@ module.exports.help = {
   name: "clear",
   aliases: ["purge"],
   category: "moderation",
-  description: "Supprimer plusieurs messages avec une commande",
-  usage: "+ nombre de messages à supprimer",
+  description: "Supprimer plusieurs messages avec une commande.",
+  usage: "+ nombre de messages à supprimer.",
 };

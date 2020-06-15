@@ -30,4 +30,8 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
   name: "dm",
+  aliases: ["dm"],
+  category: "moderation",
+  description: "Envoyer un message en DM",
+  usage: "+ @delapersonne + le message",
 };
