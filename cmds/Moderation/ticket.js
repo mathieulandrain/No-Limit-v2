@@ -16,4 +16,8 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
   name: "ticket",
+  aliases: ["ticket"],
+  category: "moderation",
+  description: "Met un embed de ticket",
+  usage: "",
 };
