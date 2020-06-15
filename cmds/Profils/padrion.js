@@ -21,6 +21,6 @@ module.exports.help = {
   name: `padrion`,
   aliases: ["padrion"],
   category: "profils",
-  description: "Ban une personne.",
-  usage: "<command_name> + @delapersonne + raison",
+  description: "Avoir accès au profil GLR d'un membre",
+  usage: "",
 };
