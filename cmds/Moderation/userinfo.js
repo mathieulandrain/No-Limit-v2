@@ -90,5 +90,5 @@ module.exports.help = {
   aliases: ["ui"],
   category: "moderation",
   description: "Connaître les infos d'une personne.",
-  usage: "+ @delapersonne",
+  usage: "+ @delapersonne ou ID",
 };

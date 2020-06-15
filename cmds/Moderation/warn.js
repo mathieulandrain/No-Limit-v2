@@ -53,4 +53,8 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
   name: "warn",
+  aliases: ["warn"],
+  category: "moderation",
+  description: "Warn une personne.",
+  usage: "+ @delapersonne ou ID + raison",
 };
