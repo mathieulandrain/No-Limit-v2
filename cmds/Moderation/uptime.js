@@ -18,4 +18,8 @@ module.exports.run = async (bot, message, args) => {
 };
 module.exports.help = {
   name: "uptime",
+  aliases: ["uptime"],
+  category: "moderation",
+  description: "Savoir depuis combien de temps le bot marche",
+  usage: "",
 };
