@@ -31,4 +31,8 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
   name: "règles",
+  aliases: ["règles"],
+  category: "moderation",
+  description: "Affiche les règles dans un embed",
+  usage: "",
 };
