@@ -10,6 +10,10 @@ module.exports = async (bot) => {
   ];
 
   setInterval(function () {
+    let statuses = [
+      `${prefix}help`,
+      `En ligne sur ${bot.guilds.cache.size} serveurs`,
+    ];
     let status = statuses[Math.floor(Math.random() * statuses.length)];
     bot.user.setActivity(status, { type: "WATCHING" });
     let myGuild = bot.guilds.cache.get("692564832284704819");
