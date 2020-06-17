@@ -1,10 +1,12 @@
 const { MessageEmbed } = require("discord.js");
 const { yes, neutre, no, yesID, neutreID, noID } = require("../../emotes.json");
+const colours = require("../../colours.json");
 
 module.exports.run = async (bot, message, args) => {
   const embed = new MessageEmbed()
     .setAuthor(message.author.username, message.author.displayAvatarURL())
-    .setColor("#ad14da")
+    .setThumbnail(message.author.displayAvatarURL())
+    .setColor(colours.blue_light)
     .setDescription(args.join(" "))
     .addField(
       "Répondre à la question ci-dessus à l'aide d'une des réactions:",
