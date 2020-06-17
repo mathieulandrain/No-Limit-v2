@@ -3,6 +3,10 @@ const { yes, neutre, no, yesID, neutreID, noID } = require("../../emotes.json");
 const colours = require("../../colours.json");
 
 module.exports.run = async (bot, message, args) => {
+  if (!message.member.hasPermission(["MANAGE_MESSAGES", "ADMINISTRATOR"]))
+    return message.channel.send(
+      "** Vous ne pouvez pas utiliser cette commande ! ** "
+    );
   const embed = new MessageEmbed()
     .setAuthor(message.author.username, message.author.displayAvatarURL())
     .setThumbnail(message.author.displayAvatarURL())
