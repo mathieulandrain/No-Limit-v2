@@ -47,8 +47,8 @@ module.exports.run = (bot, message, args) => {
 
 module.exports.help = {
   name: "troupes",
-  aliases: [`troupe`],
-  category: "📜 - Wiki",
+  aliases: ["troupe"],
+  category: "📜 - wiki",
   description: "Renvoie les infos sur GLR",
   usage: "",
 };

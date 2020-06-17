@@ -67,8 +67,8 @@ module.exports.run = (bot, message, args) => {
 
 module.exports.help = {
   name: "bâtiments",
-  aliases: [`batiments`, `bâtiment`, `batiment`],
-  category: "📜 - Wiki",
+  aliases: ["batiments", "bâtiment", "batiment"],
+  category: "📜 - wiki",
   description: "Renvoie les infos sur GLR",
   usage: "",
 };

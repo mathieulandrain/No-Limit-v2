@@ -6,7 +6,7 @@ const bot = new Discord.Client();
 const {
   token,
   prefix,
-  BOT_ID,
+  Serveur_ID,
   memberCountChannelID,
   AccueilChanID,
   RecrueID,
@@ -108,7 +108,7 @@ bot.on("message", async (message) => {
 bot.on("guildMemberAdd", async (member) => {
   const channel = member.guild.channels.cache.get(`${AccueilChanID}`);
 
-  let myGuild = bot.guilds.cache.get(`${BOT_ID}`);
+  let myGuild = bot.guilds.cache.get(`${Serveur_ID}`);
   let memberCount = myGuild.members.cache.filter((m) => !m.user.bot).size;
   let memberCountChannel = myGuild.channels.cache.get(
     `${memberCountChannelID}`
@@ -134,7 +134,7 @@ bot.on("guildMemberRemove", (member) => {
     .setFooter(`No Limit - Départ`, bot.user.displayAvatarURL());
   member.guild.channels.cache.get(`${AccueilChanID}`).send(removeEmbed);
 
-  let myGuild = bot.guilds.cache.get(`${BOT_ID}`);
+  let myGuild = bot.guilds.cache.get(`${Serveur_ID}`);
   let memberCount = myGuild.members.cache.filter((m) => !m.user.bot).size;
   let memberCountChannel = myGuild.channels.cache.get(
     `${memberCountChannelID}`

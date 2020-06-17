@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const utip = require("utip.io");
 const colours = require("../../colours.json");
 const {
-  BOT_ID,
+  Serveur_ID,
   memberCountChannelID,
   utipchanID,
 } = require("../../config.json");
@@ -29,7 +29,7 @@ module.exports.run = async (bot, message, args) => {
       bot.user.displayAvatarURL("png", true)
     );
   message.channel.send(UtEmbed);
-  let myGuild = bot.guilds.cache.get(`${BOT_ID}`);
+  let myGuild = bot.guilds.cache.get(`${Serveur_ID}`);
   let utipCount = information;
   let utipCountChannel = myGuild.channels.cache.get(`${utipchanID}`);
   utipCountChannel.setName(`💸Nous avons: ${utipCount}`);

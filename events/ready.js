@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const { BOT_ID, prefix, memberCountChannelID } = require("../config.json");
+const { Serveur_ID, prefix, memberCountChannelID } = require("../config.json");
 
 module.exports = async (bot) => {
   console.log(`(NoLimitv2): En ligne`);
@@ -16,7 +16,7 @@ module.exports = async (bot) => {
     ];
     let status = statuses[Math.floor(Math.random() * statuses.length)];
     bot.user.setActivity(status, { type: "WATCHING" });
-    let myGuild = bot.guilds.cache.get(`${BOT_ID}`);
+    let myGuild = bot.guilds.cache.get(`${Serveur_ID}`);
     let memberCount = myGuild.members.cache.filter((m) => !m.user.bot).size;
     let memberCountChannel = myGuild.channels.cache.get(
       `${memberCountChannelID}`
