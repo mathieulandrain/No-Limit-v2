@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+const { EmoteValidID } = require("../../config.json");
 
 module.exports.run = async (bot, message, args) => {
   message.delete();
@@ -26,7 +27,7 @@ module.exports.run = async (bot, message, args) => {
     .setFooter(`No Limit - Validation `, bot.user.displayAvatarURL());
   console.log("Etape 2");
   message.channel.send(RolesEmbed).then(async (msg) => {
-    msg.react("702767205137252384");
+    msg.react(`${EmoteValidID}`);
   });
 };
 

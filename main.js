@@ -3,7 +3,17 @@ const snekfetch = require("snekfetch");
 const { readdirSync } = require("fs");
 const superagent = require("superagent");
 const bot = new Discord.Client();
-const { token, prefix } = require("./config.json");
+const {
+  token,
+  prefix,
+  BOT_ID,
+  memberCountChannelID,
+  AccueilChanID,
+  RecrueID,
+  TicketID,
+  ChanValidID,
+  RoleValidID,
+} = require("./config.json");
 const colours = require("./colours.json");
 const moment = require("moment");
 const { loadCommands, loadEvents } = require("./util/loader");
@@ -96,11 +106,13 @@ bot.on("message", async (message) => {
 });
 
 bot.on("guildMemberAdd", async (member) => {
-  const channel = member.guild.channels.cache.get("683734629949505556");
+  const channel = member.guild.channels.cache.get(`${AccueilChanID}`);
 
-  let myGuild = bot.guilds.cache.get("683734629945311349");
+  let myGuild = bot.guilds.cache.get(`${BOT_ID}`);
   let memberCount = myGuild.members.cache.filter((m) => !m.user.bot).size;
-  let memberCountChannel = myGuild.channels.cache.get("702666918322241547");
+  let memberCountChannel = myGuild.channels.cache.get(
+    `${memberCountChannelID}`
+  );
   memberCountChannel.setName(`Nous sommes: ` + memberCount);
 
   let newEmbed = new Discord.MessageEmbed()
@@ -109,9 +121,9 @@ bot.on("guildMemberAdd", async (member) => {
     .setDescription(`**Bienvenue à ${member} sur le serveur**`)
     .addField(`Nous sommes désormais:`, `${memberCount} membres`)
     .setFooter(`Nouveau - No Limit `, bot.user.displayAvatarURL());
-  member.guild.channels.cache.get("683734629949505556").send(newEmbed);
+  member.guild.channels.cache.get(`${AccueilChanID}`).send(newEmbed);
 
-  let recrue = member.guild.roles.cache.get("697182454607511652");
+  let recrue = member.guild.roles.cache.get(`${RecrueID}`);
   member.roles.add(recrue);
 });
 bot.on("guildMemberRemove", (member) => {
@@ -120,11 +132,13 @@ bot.on("guildMemberRemove", (member) => {
     .setColor(colours.red_dark)
     .setDescription(`**${member} nous a quitté...**`)
     .setFooter(`No Limit - Départ`, bot.user.displayAvatarURL());
-  member.guild.channels.cache.get("683734629949505556").send(removeEmbed);
+  member.guild.channels.cache.get(`${AccueilChanID}`).send(removeEmbed);
 
-  let myGuild = bot.guilds.cache.get("683734629945311349");
+  let myGuild = bot.guilds.cache.get(`${BOT_ID}`);
   let memberCount = myGuild.members.cache.filter((m) => !m.user.bot).size;
-  let memberCountChannel = myGuild.channels.cache.get("702666918322241547");
+  let memberCountChannel = myGuild.channels.cache.get(
+    `${memberCountChannelID}`
+  );
   memberCountChannel.setName(`Nous sommes: ` + memberCount);
 });
 bot.on("messageReactionAdd", (reaction, user) => {
@@ -149,7 +163,7 @@ bot.on("messageReactionAdd", (reaction, user) => {
 
         let result = Math.floor(Math.random() * TicketList.length);
 
-        var categoryID = "702666419044614154";
+        var categoryID = `${TicketID}`;
         if (!bot.channels.cache.get(categoryID)) {
           if (
             !bot.channels.cache.find(
@@ -237,8 +251,8 @@ bot.on("messageReactionAdd", (messageReaction, user) => {
   const message = messageReaction.message;
   const member = message.guild.members.cache.get(user.id);
   if (user.bot) return;
-  if (messageReaction.message.channel.id != "693445781977301023") return;
-  const ValidationRoles = message.guild.roles.cache.get("702919919490039901");
+  if (messageReaction.message.channel.id != `${ChanValidID}`) return;
+  const ValidationRoles = message.guild.roles.cache.get(`${RoleValidID}`);
 
   if (messageReaction.emoji.name === "Validation") {
     console.log("Etape 6");

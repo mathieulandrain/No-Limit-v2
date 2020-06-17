@@ -4,7 +4,7 @@ const colours = require("../../colours.json");
 module.exports.run = async (bot, message, args) => {
   let aEmbed = new Discord.MessageEmbed()
     .setColor(colours.green_light)
-    .setTitle("Profile GLR")
+    .setTitle("Profil GLR")
     .setThumbnail(message.guild.iconURL())
     .addField(
       "Pour aller sur le profil de",
