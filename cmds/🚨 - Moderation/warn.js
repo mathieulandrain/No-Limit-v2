@@ -1,10 +1,12 @@
 const Discord = require("discord.js");
 const botconfig = require("../../config.json");
-const colours = require("../../colours.json");
+const colours = require("../../assets/json/colours.json");
 const fs = require("fs");
 
 module.exports.run = async (bot, message, args) => {
-  let warns = JSON.parse(fs.readFileSync("./warnings.json", "utf8"));
+  let warns = JSON.parse(
+    fs.readFileSync("./assets/json/Moderation/warnings.json", "utf8")
+  );
   if (!message.member.hasPermission("MANAGE_CHANNELS"))
     return message.channel.send("Vous n'avez pas la permission.");
   if (!message.guild.me.hasPermission("ADMINISTRATOR"))
@@ -33,7 +35,10 @@ module.exports.run = async (bot, message, args) => {
     });
   }
 
-  fs.writeFileSync("./warnings.json", JSON.stringify(warns));
+  fs.writeFileSync(
+    "./assets/json/Moderation/warnings.json",
+    JSON.stringify(warns)
+  );
   console.log(warns[member.id]);
   let warnEmbed = new Discord.MessageEmbed()
     .setDescription(

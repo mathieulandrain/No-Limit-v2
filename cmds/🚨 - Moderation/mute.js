@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
-const colours = require("../../colours.json");
+const colours = require("../../assets/json/colours.json");
+const { logchanID } = require("../../config.json");
 
 module.exports.run = async (bot, message, args) => {
   if (!message.member.hasPermission("MANAGE_ROLES") || !message.guild.owner)
@@ -67,7 +68,7 @@ module.exports.run = async (bot, message, args) => {
     .addField("Utilisateur ayant mute", message.author.tag)
     .addField("Raison", reason);
 
-  let lChannel = message.guild.channels.cache.find((c) => c.name === "logs");
+  let lChannel = message.guild.channels.cache.get(`${logchanID}`);
   lChannel.send(MuteLogEmbed);
 };
 

@@ -1,5 +1,7 @@
 const Discord = require("discord.js");
-const colours = require("../../colours.json");
+const colours = require("../../assets/json/colours.json");
+const emotes = require("../../assets/json/emotes.json");
+const { reportchanID } = require("../../config.json");
 
 module.exports.run = async (bot, message, args) => {
   message.delete();
@@ -19,7 +21,7 @@ module.exports.run = async (bot, message, args) => {
       )
       .then((m) => m.delete(5000));
 
-  let rChannel = message.guild.channels.cache.find((c) => c.name === "report");
+  let rChannel = message.guild.channels.cache.get(`${reportchanID}`);
 
   message.channel
     .send("Votre report à été envoyer au staff, Merci pour votre contribution.")
@@ -29,9 +31,9 @@ module.exports.run = async (bot, message, args) => {
       `**${message.author.tag}** à report **${target.user.tag}** pour la raison : ${reason}.`
     )
     .then(async (msg) => {
-      msg.react("✅");
-      msg.react("➖");
-      msg.react("❌");
+      msg.react(`${emotes.reportyesID}`);
+      msg.react(`${emotes.neutreID}`);
+      msg.react(`${emotes.reportnoID}`);
     });
 };
 

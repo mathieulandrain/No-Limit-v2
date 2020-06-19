@@ -1,8 +1,9 @@
 const Discord = require("discord.js");
-const colours = require("../../colours.json");
+const colours = require("../../assets/json/colours.json");
 const moment = require("moment");
 moment.locale("fr");
 const fs = require("fs");
+let warns = require("../../assets/json/Moderation/warnings.json");
 
 module.exports.run = async (bot, message, args) => {
   let inline = true;
@@ -14,10 +15,13 @@ module.exports.run = async (bot, message, args) => {
     offline: " Hors-Ligne/Invisble",
     dnd: " Ne pas déranger",
   };
-  let warns = JSON.parse(fs.readFileSync("./warnings.json", "utf8"));
+  let warns = JSON.parse(
+    fs.readFileSync("./assets/json/Moderation/warnings.json", "utf8")
+  );
   let userinfo =
     message.mentions.members.first() ||
-    message.guild.members.cache.get(args[0]);
+    message.guild.members.cache.get(args[0]) ||
+    message.member;
 
   if (!warns[userinfo.user.id]) {
     warns[userinfo.user.id] = [{}];

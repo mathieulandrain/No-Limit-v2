@@ -1,20 +1,7 @@
 const Discord = require("discord.js");
-const snekfetch = require("snekfetch");
-const { readdirSync } = require("fs");
-const superagent = require("superagent");
 const bot = new Discord.Client();
-const {
-  token,
-  prefix,
-  Serveur_ID,
-  memberCountChannelID,
-  AccueilChanID,
-  RecrueID,
-  TicketID,
-  ChanValidID,
-  RoleValidID,
-} = require("./config.json");
-const colours = require("./colours.json");
+const config = require("./config.json");
+const colours = require("./assets/json/colours.json");
 const moment = require("moment");
 const { loadCommands, loadEvents } = require("./util/loader");
 moment.locale("fr");
@@ -25,11 +12,10 @@ bot.commands = new Discord.Collection();
 loadCommands(bot);
 loadEvents(bot);
 
-bot.login(token);
+bot.login(config.token);
 
 bot.on("ready", async () => {
-  let ChannelTicket = bot.channels.cache.get("702666567460061204");
-
+  let ChannelTicket = bot.channels.cache.get(`${config.ChanTicketID}`);
   ChannelTicket.bulkDelete(100);
 
   let TicketEmbed = new Discord.MessageEmbed()
@@ -44,8 +30,7 @@ bot.on("ready", async () => {
   ChannelTicket.send(TicketEmbed).then(async (msg) => {
     msg.react("🎟️");
   });
-  let ChannelValid = bot.channels.cache.get("693445781977301023");
-
+  let ChannelValid = bot.channels.cache.get(`${config.ChanValidID}`);
   ChannelValid.bulkDelete(100);
 
   let mess = new Discord.MessageEmbed()
@@ -81,37 +66,37 @@ bot.on("ready", async () => {
     )
     .setFooter(`No Limit - Validation `, bot.user.displayAvatarURL());
   ChannelValid.send(RolesEmbed).then(async (msg) => {
-    msg.react("702767205137252384");
+    msg.react(`${config.TestValidID}`);
   });
 });
 
 bot.on("message", async (message) => {
   if (message.author.bot) return;
   if (message.channel.type === "dm") return;
-  if (!message.content.startsWith(prefix)) return;
+  if (!message.content.startsWith(config.prefix)) return;
 
   let messageArray = message.content.split(" ");
   let command = messageArray[0];
   let args = messageArray.slice(1);
 
   let commandFile =
-    bot.commands.get(command.slice(prefix.length)) ||
+    bot.commands.get(command.slice(config.prefix.length)) ||
     bot.commands.find(
       (cmd) =>
         cmd.help.aliases &&
-        cmd.help.aliases.includes(command.slice(prefix.length))
+        cmd.help.aliases.includes(command.slice(config.prefix.length))
     );
-  console.log(bot.commands);
-  if (commandFile) commandFile.run(bot, message, args, prefix);
+  // console.log(bot.commands);
+  if (commandFile) commandFile.run(bot, message, args, config.prefix);
 });
 
 bot.on("guildMemberAdd", async (member) => {
-  const channel = member.guild.channels.cache.get(`${AccueilChanID}`);
+  const channel = member.guild.channels.cache.get(`${config.AccueilChanID}`);
 
-  let myGuild = bot.guilds.cache.get(`${Serveur_ID}`);
+  let myGuild = bot.guilds.cache.get(`${config.Serveur_ID}`);
   let memberCount = myGuild.members.cache.filter((m) => !m.user.bot).size;
   let memberCountChannel = myGuild.channels.cache.get(
-    `${memberCountChannelID}`
+    `${config.memberCountChannelID}`
   );
   memberCountChannel.setName(`Nous sommes: ` + memberCount);
 
@@ -121,9 +106,9 @@ bot.on("guildMemberAdd", async (member) => {
     .setDescription(`**Bienvenue à ${member} sur le serveur**`)
     .addField(`Nous sommes désormais:`, `${memberCount} membres`)
     .setFooter(`Nouveau - No Limit `, bot.user.displayAvatarURL());
-  member.guild.channels.cache.get(`${AccueilChanID}`).send(newEmbed);
+  member.guild.channels.cache.get(`${config.AccueilChanID}`).send(newEmbed);
 
-  let recrue = member.guild.roles.cache.get(`${RecrueID}`);
+  let recrue = member.guild.roles.cache.get(`${config.RecrueID}`);
   member.roles.add(recrue);
 });
 bot.on("guildMemberRemove", (member) => {
@@ -132,12 +117,12 @@ bot.on("guildMemberRemove", (member) => {
     .setColor(colours.red_dark)
     .setDescription(`**${member} nous a quitté...**`)
     .setFooter(`No Limit - Départ`, bot.user.displayAvatarURL());
-  member.guild.channels.cache.get(`${AccueilChanID}`).send(removeEmbed);
+  member.guild.channels.cache.get(`${config.AccueilChanID}`).send(removeEmbed);
 
-  let myGuild = bot.guilds.cache.get(`${Serveur_ID}`);
+  let myGuild = bot.guilds.cache.get(`${config.Serveur_ID}`);
   let memberCount = myGuild.members.cache.filter((m) => !m.user.bot).size;
   let memberCountChannel = myGuild.channels.cache.get(
-    `${memberCountChannelID}`
+    `${config.memberCountChannelID}`
   );
   memberCountChannel.setName(`Nous sommes: ` + memberCount);
 });
@@ -163,7 +148,7 @@ bot.on("messageReactionAdd", (reaction, user) => {
 
         let result = Math.floor(Math.random() * TicketList.length);
 
-        var categoryID = `${TicketID}`;
+        var categoryID = `${config.TicketID}`;
         if (!bot.channels.cache.get(categoryID)) {
           if (
             !bot.channels.cache.find(
@@ -237,8 +222,8 @@ bot.on("messageReactionAdd", (reaction, user) => {
             bot.user.displayAvatarURL("png", true)
           );
 
-        let logChannel = message.guild.channels.cache.find(
-          (c) => c.name == "logs"
+        let logChannel = message.guild.channels.cache.get(
+          `${config.logchanID}`
         );
         if (logChannel) {
           logChannel.send(embedTicketClose);
@@ -251,8 +236,10 @@ bot.on("messageReactionAdd", (messageReaction, user) => {
   const message = messageReaction.message;
   const member = message.guild.members.cache.get(user.id);
   if (user.bot) return;
-  if (messageReaction.message.channel.id != `${ChanValidID}`) return;
-  const ValidationRoles = message.guild.roles.cache.get(`${RoleValidID}`);
+  if (messageReaction.message.channel.id != `${config.ChanValidID}`) return;
+  const ValidationRoles = message.guild.roles.cache.get(
+    `${config.RoleValidID}`
+  );
 
   if (messageReaction.emoji.name === "Validation") {
     console.log("Etape 6");

@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const botconfig = require("../../config.json");
-const colours = require("../../colours.json");
+const colours = require("../../assets/json/colours.json");
 const superagent = require("superagent");
 
 module.exports.run = async (bot, message, args) => {
@@ -15,7 +15,13 @@ module.exports.run = async (bot, message, args) => {
       "Veuillez mettre l'utilisateur pour envoyer le message"
     );
 
-  let email = args.join(" ").slice(19);
+  if (args[0] !== `<@!${DMember.id}>` && args[0] !== DMember.id) {
+    return message.channel.send(
+      "L'utilisateur doit être mentionné avant le message"
+    );
+  }
+
+  let email = args.join(" ").slice(args[0].length);
   if (!email)
     return message.channel.send("Vous devez mettre le messages pour l'envoie.");
 

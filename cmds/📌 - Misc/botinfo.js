@@ -1,6 +1,6 @@
 const { MessageEmbed } = require("discord.js");
-const { version } = require("../../package.json");
-const colours = require("../../colours.json");
+const package = require("../../package.json");
+const colours = require("../../assets/json/colours.json");
 
 module.exports.run = (bot, message, args) => {
   const embed = new MessageEmbed()
@@ -38,7 +38,7 @@ module.exports.run = (bot, message, args) => {
           .reduce((a, b) => a + b)}`,
         inline: true,
       },
-      { name: "⚙️ - Version:", value: `${version}`, inline: true },
+      { name: "⚙️ - Version:", value: `${package.version}`, inline: true },
       {
         name: "📖 - Code Source:",
         value: `[Available on GitHub](https://github.com/mathieulandrain/No-Limit-v2)`,

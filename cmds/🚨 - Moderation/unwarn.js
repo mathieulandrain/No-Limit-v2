@@ -1,11 +1,13 @@
 const Discord = require("discord.js");
 const botconfig = require("../../config.json");
-const colours = require("../../colours.json");
+const colours = require("../../assets/json/colours.json");
 const fs = require("fs");
-let warn = require("../../warnings.json");
+let warns = require("../../assets/json/Moderation/warnings.json");
 
 module.exports.run = async (bot, message, args, prefix) => {
-  let warns = JSON.parse(fs.readFileSync("./warnings.json", "utf8"));
+  let warns = JSON.parse(
+    fs.readFileSync("./assets/json/Moderation/warnings.json", "utf8")
+  );
   if (!message.member.hasPermission("MANAGE_CHANNELS"))
     return message.channel.send("Vous n'avez pas la permission.");
   if (!message.guild.me.hasPermission("ADMINISTRATOR"))
@@ -27,7 +29,10 @@ module.exports.run = async (bot, message, args, prefix) => {
     );
   }
 
-  fs.writeFileSync("./warnings.json", JSON.stringify(warns));
+  fs.writeFileSync(
+    "./assets/json/Moderation/warnings.json",
+    JSON.stringify(warns)
+  );
   message.channel.send(
     `Le warn numéro ${args[1]} de ${member.id} a été retiré :white_check_mark:`
   );

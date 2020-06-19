@@ -1,7 +1,6 @@
 const { MessageEmbed } = require("discord.js");
-const { version } = require("../../package.json");
-const colours = require("../../colours.json");
-const { base, colosse } = require("../../emotes.json");
+const colours = require("../../assets/json/colours.json");
+const emotes = require("../../assets/json/emotes.json");
 const { prefix } = require("../../config.json");
 
 module.exports.run = (bot, message, args) => {
@@ -13,11 +12,11 @@ module.exports.run = (bot, message, args) => {
       `Ici vous aurez accès aux pages générale pour des précises regardez la catégorie Wiki dans ${prefix}help ou faite ${prefix}bâtiments, ${prefix}troupes, ${prefix}autres.`
     )
     .addField(
-      `${base} - Bâtiments:`,
+      `${emotes.base} - Bâtiments:`,
       `[Disponible ici](https://galaxylife.fandom.com/wiki/Category:Buildings)`
     )
     .addField(
-      `${colosse} - Troupes:`,
+      `${emotes.colosse} - Troupes:`,
       `[Disponible ici](https://galaxylife.fandom.com/wiki/Category:Troops)`
     )
     .setFooter(`No Limit | Wiki`, bot.user.displayAvatarURL());

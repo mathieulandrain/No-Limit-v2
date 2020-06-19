@@ -1,14 +1,16 @@
 const Discord = require("discord.js");
-const colours = require("../../colours.json");
+const colours = require("../../assets/json/colours.json");
+const emotes = require("../../assets/json/emotes.json");
+const membres = require("../../assets/json/membres.json");
 
 module.exports.run = async (bot, message, args) => {
   let aEmbed = new Discord.MessageEmbed()
     .setColor(colours.green_light)
-    .setTitle("Profil GLR")
+    .setTitle(`${emotes.profil} - Profil GLR`)
     .setThumbnail(message.guild.iconURL())
     .addField(
       "Pour aller sur le profil de",
-      "<@695041481152397352> [clic ici](https://discordapp.com/channels/683734629945311349/717462020240441424/717463476817363075)"
+      `<@${membres.anais}> [clic ici](https://discordapp.com/channels/683734629945311349/717462020240441424/717463476817363075)`
     )
     .setFooter(
       `No Limit - Profil GLR `,

@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
-const colours = require("../../colours.json");
+const colours = require("../../assets/json/colours.json");
+const { logchanID } = require("../../config.json");
 
 module.exports.run = async (bot, message, args) => {
   message.delete();
@@ -35,7 +36,7 @@ module.exports.run = async (bot, message, args) => {
     .setTimestamp()
     .setFooter(`unBan - No Limit `, bot.user.displayAvatarURL());
 
-  let lChannel = message.guild.channels.cache.find((c) => c.name === "logs");
+  let lChannel = message.guild.channels.cache.get(`${logchanID}`);
   lChannel.send(embed);
 };
 

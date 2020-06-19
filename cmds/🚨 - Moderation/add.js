@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const colours = require("../../colours.json");
+const colours = require("../../assets/json/colours.json");
 
 module.exports.run = async (bot, message, args) => {
   let addrole = message.guild.member(

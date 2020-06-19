@@ -1,6 +1,6 @@
 const { MessageEmbed } = require("discord.js");
-const { yes, neutre, no, yesID, neutreID, noID } = require("../../emotes.json");
-const colours = require("../../colours.json");
+const emotes = require("../../assets/json/emotes.json");
+const colours = require("../../assets/json/colours.json");
 
 module.exports.run = async (bot, message, args) => {
   if (!message.member.hasPermission(["MANAGE_MESSAGES", "ADMINISTRATOR"]))
@@ -14,19 +14,15 @@ module.exports.run = async (bot, message, args) => {
     .setDescription(args.join(" "))
     .addField(
       "Répondre à la question ci-dessus à l'aide d'une des réactions:",
-      `
-    ${yes} - Pour (Oui)
-    ${neutre} - Neutre
-    ${no} - Contre (Non)
-    `
+      `\n${emotes.yes} - Pour (Oui)\n${emotes.neutre} - Neutre\n${emotes.no} - Contre (Non)`
     )
     .setTimestamp()
     .setFooter("Merci de voter qu'une fois.");
 
   const poll = await message.channel.send(embed);
-  await poll.react(`${yesID}`);
-  await poll.react(`${neutreID}`);
-  await poll.react(`${noID}`);
+  await poll.react(`${emotes.yesID}`);
+  await poll.react(`${emotes.neutreID}`);
+  await poll.react(`${emotes.noID}`);
 };
 
 module.exports.help = {

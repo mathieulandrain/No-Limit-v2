@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
-const colours = require("../../colours.json");
+const colours = require("../../assets/json/colours.json");
+const { logchanID } = require("../../config.json");
 
 module.exports.run = async (bot, message, args) => {
   let bannedUser = message.guild.member(
@@ -41,7 +42,7 @@ module.exports.run = async (bot, message, args) => {
     channel.send(bandmEmbed);
   });
 
-  let banChannel = message.guild.channels.cache.find((c) => c.name === "logs");
+  let banChannel = message.guild.channels.cache.get(`${logchanID}`);
   if (!banChannel) {
     return message.channel.send(
       "Canal 'logs' non trouvé. S'il vous plaît créer le."

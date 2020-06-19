@@ -1,44 +1,24 @@
 const { MessageEmbed } = require("discord.js");
-const { version } = require("../../package.json");
-const colours = require("../../colours.json");
-const {
-  marine,
-  pilleur,
-  flamme,
-  bazooka,
-  kami,
-  starlin,
-  esquade,
-  bérets,
-  colosse,
-  strikes,
-  tank,
-  raider,
-  taupe,
-  guepe,
-  zep,
-  ovni,
-  falcon,
-} = require("../../emotes.json");
-const { prefix } = require("../../config.json");
+const colours = require("../../assets/json/colours.json");
+const emotes = require("../../assets/json/emotes.json");
 
 module.exports.run = (bot, message, args) => {
   const embed = new MessageEmbed()
     .setColor(colours.green_light)
-    .setTitle(`${colosse} - Troupes`)
+    .setTitle(`${emotes.colosse} - Troupes`)
     .setThumbnail(bot.user.avatarURL())
     .setDescription(`Ici vous aurez accès aux pages pour les troupes.`)
     .addField(
-      `${starlin} - Infanterie:`,
-      `${marine} - [Marine](https://galaxylife.fandom.com/wiki/Marine)\n${pilleur} - [Pilleur](https://galaxylife.fandom.com/wiki/Looter)\n${flamme} - [Lance Flamme](https://galaxylife.fandom.com/wiki/Flame_Thrower)\n${bazooka} - [Bazooka](https://galaxylife.fandom.com/wiki/Bazooka)\n${kami} - [Kamikaze](https://galaxylife.fandom.com/wiki/Kamikaze)\n${starlin} - [Starlinator](https://galaxylife.fandom.com/wiki/Starlinator)\n${esquade} - [Esquade](https://galaxylife.fandom.com/wiki/Smasher_Squad)\n${bérets} - [Bérets vert](https://galaxylife.fandom.com/wiki/Green_Beret)`
+      `${emotes.starlin} - Infanterie:`,
+      `${emotes.marine} - [Marine](https://galaxylife.fandom.com/wiki/Marine)\n${emotes.pilleur} - [Pilleur](https://galaxylife.fandom.com/wiki/Looter)\n${emotes.flamme} - [Lance Flamme](https://galaxylife.fandom.com/wiki/Flame_Thrower)\n${emotes.bazooka} - [Bazooka](https://galaxylife.fandom.com/wiki/Bazooka)\n${emotes.kami} - [Kamikaze](https://galaxylife.fandom.com/wiki/Kamikaze)\n${emotes.starlin} - [Starlinator](https://galaxylife.fandom.com/wiki/Starlinator)\n${emotes.esquade} - [Esquade](https://galaxylife.fandom.com/wiki/Smasher_Squad)\n${emotes.bérets} - [Bérets vert](https://galaxylife.fandom.com/wiki/Green_Beret)`
     )
     .addField(
-      `${colosse} - Véhiculée:`,
-      `${strikes} - [S-Trikes](https://galaxylife.fandom.com/wiki/S-Trike)\n${tank} - [Tank](https://galaxylife.fandom.com/wiki/Beetle_Tank)\n${raider} - [Raider](https://galaxylife.fandom.com/wiki/Raider)\n${taupe} - [Taupe](https://galaxylife.fandom.com/wiki/The_Mole)\n${colosse} - [Colosse](https://galaxylife.fandom.com/wiki/Colossus)`
+      `${emotes.colosse} - Véhiculée:`,
+      `${emotes.strikes} - [S-Trikes](https://galaxylife.fandom.com/wiki/S-Trike)\n${emotes.tank} - [Tank](https://galaxylife.fandom.com/wiki/Beetle_Tank)\n${emotes.raider} - [Raider](https://galaxylife.fandom.com/wiki/Raider)\n${emotes.taupe} - [Taupe](https://galaxylife.fandom.com/wiki/The_Mole)\n${emotes.colosse} - [Colosse](https://galaxylife.fandom.com/wiki/Colossus)`
     )
     .addField(
-      `${zep} - Aérienne:`,
-      `${guepe} - [Guêpe](https://galaxylife.fandom.com/wiki/Wasp)\n${ovni} - [Ovni Aspirateur](https://galaxylife.fandom.com/wiki/Hoover_UFO)\n${falcon} - [Falcon](https://galaxylife.fandom.com/wiki/Falcon)\n${zep} - [Zeppelin](https://galaxylife.fandom.com/wiki/Zeppelin)`
+      `${emotes.zep} - Aérienne:`,
+      `${emotes.guepe} - [Guêpe](https://galaxylife.fandom.com/wiki/Wasp)\n${emotes.ovni} - [Ovni Aspirateur](https://galaxylife.fandom.com/wiki/Hoover_UFO)\n${emotes.falcon} - [Falcon](https://galaxylife.fandom.com/wiki/Falcon)\n${emotes.zep} - [Zeppelin](https://galaxylife.fandom.com/wiki/Zeppelin)`
     )
     .setFooter(`No Limit | Wiki - Troupes`, bot.user.displayAvatarURL());
 

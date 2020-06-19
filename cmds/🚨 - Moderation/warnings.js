@@ -1,13 +1,15 @@
 const Discord = require("discord.js");
 const botconfig = require("../../config.json");
-const colours = require("../../colours.json");
+const colours = require("../../assets/json/colours.json");
 const fs = require("fs");
-let warn = require("../../warnings.json");
+let warn = require("../../assets/json/Moderation/warnings.json");
 const moment = require("moment");
 moment.locale("fr");
 
 module.exports.run = async (bot, message, args) => {
-  let warns = JSON.parse(fs.readFileSync("./warnings.json", "utf8"));
+  let warns = JSON.parse(
+    fs.readFileSync("./assets/json/Moderation/warnings.json", "utf8")
+  );
   if (!message.member.hasPermission("MANAGE_MESSAGES"))
     return message.channel.send(
       "Vous n'avez pas la permission d'utiliser cette commande"
@@ -26,7 +28,10 @@ module.exports.run = async (bot, message, args) => {
     ];
   }
 
-  fs.writeFileSync("./warnings.json", JSON.stringify(warns));
+  fs.writeFileSync(
+    "./assets/json/Moderation/warnings.json",
+    JSON.stringify(warns)
+  );
 
   let embed = new Discord.MessageEmbed()
     .setColor(colours.red_light)

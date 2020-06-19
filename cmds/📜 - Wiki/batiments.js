@@ -1,64 +1,32 @@
 const { MessageEmbed } = require("discord.js");
-const { version } = require("../../package.json");
-const colours = require("../../colours.json");
-const {
-  base,
-  labo,
-  obso,
-  académie,
-  building,
-  ressources,
-  maison,
-  mine,
-  banque,
-  silo,
-  raffinerie,
-  militaire,
-  généraux,
-  usine,
-  camp,
-  port,
-  portail,
-  défense,
-  canon,
-  snipe,
-  aa,
-  laser,
-  mortier,
-  gel,
-  bunker,
-  bunkercoop,
-  murs,
-  piège,
-  deco,
-} = require("../../emotes.json");
-const { prefix } = require("../../config.json");
+const colours = require("../../assets/json/colours.json");
+const emotes = require("../../assets/json/emotes.json");
 
 module.exports.run = (bot, message, args) => {
   const embed = new MessageEmbed()
     .setColor(colours.green_light)
-    .setTitle(`${building} - Bâtiments`)
+    .setTitle(`${emotes.building} - Bâtiments`)
     .setThumbnail(bot.user.avatarURL())
     .setDescription(`Ici vous aurez accès aux pages pour les bâtiments.`)
     .addField(
-      `${généraux} - Bâtiments Généraux:`,
-      `${base} - [Base](https://galaxylife.fandom.com/wiki/Star_Base)\n${labo} - [Laboratoire](https://galaxylife.fandom.com/wiki/Laboratory)\n${obso} - [Observatoire](https://galaxylife.fandom.com/wiki/Observatory)\n${académie} - [Académie](https://galaxylife.fandom.com/wiki/Academy)`
+      `${emotes.généraux} - Bâtiments Généraux:`,
+      `${emotes.base} - [Base](https://galaxylife.fandom.com/wiki/Star_Base)\n${emotes.labo} - [Laboratoire](https://galaxylife.fandom.com/wiki/Laboratory)\n${emotes.obso} - [Observatoire](https://galaxylife.fandom.com/wiki/Observatory)\n${emotes.académie} - [Académie](https://galaxylife.fandom.com/wiki/Academy)`
     )
     .addField(
-      `${ressources} - Ressources:`,
-      `${maison} - [Maison](https://galaxylife.fandom.com/wiki/Compact_House)\n${mine} - [Mine](https://galaxylife.fandom.com/wiki/Mine)\n${banque} - [Banque](https://galaxylife.fandom.com/wiki/Bank)\n${silo} - [Silo](https://galaxylife.fandom.com/wiki/Silo)\n${raffinerie} - [Raffinerie](https://galaxylife.fandom.com/wiki/Refinery)`
+      `${emotes.ressources} - Ressources:`,
+      `${emotes.maison} - [Maison](https://galaxylife.fandom.com/wiki/Compact_House)\n${emotes.mine} - [Mine](https://galaxylife.fandom.com/wiki/Mine)\n${emotes.banque} - [Banque](https://galaxylife.fandom.com/wiki/Bank)\n${emotes.silo} - [Silo](https://galaxylife.fandom.com/wiki/Silo)\n${emotes.raffinerie} - [Raffinerie](https://galaxylife.fandom.com/wiki/Refinery)`
     )
     .addField(
-      `${militaire} - Militaire:`,
-      `${camp} - [Camp de formation](https://galaxylife.fandom.com/wiki/Training_Camp)\n${usine} - [Usine](https://galaxylife.fandom.com/wiki/Factory)\n${port} - [Port Spacial](https://galaxylife.fandom.com/wiki/Starport)\n${portail} - [Portail](https://galaxylife.fandom.com/wiki/Warp_Gate)`
+      `${emotes.militaire} - Militaire:`,
+      `${emotes.camp} - [Camp de formation](https://galaxylife.fandom.com/wiki/Training_Camp)\n${emotes.usine} - [Usine](https://galaxylife.fandom.com/wiki/Factory)\n${emotes.port} - [Port Spacial](https://galaxylife.fandom.com/wiki/Starport)\n${emotes.portail} - [Portail](https://galaxylife.fandom.com/wiki/Warp_Gate)`
     )
     .addField(
-      `${défense} - Défenses:`,
-      `${canon} - [Canon](https://galaxylife.fandom.com/wiki/Cannon_Blast)\n${snipe} - [Tour sniper](https://galaxylife.fandom.com/wiki/Sniper_Tower)\n${aa} - [Anti Aérien](https://galaxylife.fandom.com/wiki/Missile_Launcher)\n${laser} - [Tour Laser](https://galaxylife.fandom.com/wiki/Laser_Tower)\n${mortier} - [Mortier](https://galaxylife.fandom.com/wiki/Mortar)\n${gel} - [Tour de Gel](https://galaxylife.fandom.com/wiki/Freeze_Turret)\n${bunkercoop} - [Bunker Coopératif](https://galaxylife.fandom.com/wiki/Friends_Bunker)\n${bunker} - [Bunker](https://galaxylife.fandom.com/wiki/Defense_Bunker)\n${murs} - [Murs](https://galaxylife.fandom.com/wiki/Walls)\n${piège} - [Pièges](https://galaxylife.fandom.com/wiki/Traps)`
+      `${emotes.défense} - Défenses:`,
+      `${emotes.canon} - [Canon](https://galaxylife.fandom.com/wiki/Cannon_Blast)\n${emotes.snipe} - [Tour sniper](https://galaxylife.fandom.com/wiki/Sniper_Tower)\n${emotes.aa} - [Anti Aérien](https://galaxylife.fandom.com/wiki/Missile_Launcher)\n${emotes.laser} - [Tour Laser](https://galaxylife.fandom.com/wiki/Laser_Tower)\n${emotes.mortier} - [Mortier](https://galaxylife.fandom.com/wiki/Mortar)\n${emotes.gel} - [Tour de Gel](https://galaxylife.fandom.com/wiki/Freeze_Turret)\n${emotes.bunkercoop} - [Bunker Coopératif](https://galaxylife.fandom.com/wiki/Friends_Bunker)\n${emotes.bunker} - [Bunker](https://galaxylife.fandom.com/wiki/Defense_Bunker)\n${emotes.murs} - [Murs](https://galaxylife.fandom.com/wiki/Walls)\n${emotes.piège} - [Pièges](https://galaxylife.fandom.com/wiki/Traps)`
     )
     .addField(
-      `${deco} - Décoration:`,
-      `${deco} - [Décoration](https://galaxylife.fandom.com/wiki/Decorations)`
+      `${emotes.deco} - Décoration:`,
+      `${emotes.deco} - [Décoration](https://galaxylife.fandom.com/wiki/Decorations)`
     )
     .setFooter(`No Limit | Wiki - Bâtiments`, bot.user.displayAvatarURL());
 
