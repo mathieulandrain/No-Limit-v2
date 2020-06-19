@@ -26,7 +26,7 @@ module.exports.run = async (bot, message, args) => {
   let myGuild = bot.guilds.cache.get(`${config.Serveur_ID}`);
   let utipCount = information;
   let utipCountChannel = myGuild.channels.cache.get(`${config.utipchanID}`);
-  utipCountChannel.setName(`💸Nous avons: ${config.utipCount}`);
+  utipCountChannel.setName(`💸Nous avons: ${utipCount}`);
 };
 module.exports.help = {
   name: "balanceutip",
