@@ -9,5 +9,10 @@
   "ChanValidID": "You ID",
   "RoleValidID": "You ID",
   "utipchanID": "You ID",
-  "EmoteValidID": "You ID"
+  "EmoteValidID": "You ID",
+  "utipID": "You ID",
+  "logchanID": "You ID",
+  "reportchanID": "You ID",
+  "ChanTicketID": "You ID",
+  "TestValidID": "You ID"
 }

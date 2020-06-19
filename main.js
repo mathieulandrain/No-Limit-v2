@@ -16,58 +16,62 @@ bot.login(config.token);
 
 bot.on("ready", async () => {
   let ChannelTicket = bot.channels.cache.get(`${config.ChanTicketID}`);
-  ChannelTicket.bulkDelete(100);
+  if (ChannelTicket) {
+    ChannelTicket.bulkDelete(100);
 
-  let TicketEmbed = new Discord.MessageEmbed()
-    .setColor("#cd3")
-    .setAuthor("Support du serveur")
-    .setDescription("Pour créer un ticket, appuyez sur la réaction")
-    .setFooter(
-      `Support du serveur No Limit `,
-      bot.user.displayAvatarURL("png", true)
-    );
+    let TicketEmbed = new Discord.MessageEmbed()
+      .setColor("#cd3")
+      .setAuthor("Support du serveur")
+      .setDescription("Pour créer un ticket, appuyez sur la réaction")
+      .setFooter(
+        `Support du serveur No Limit `,
+        bot.user.displayAvatarURL("png", true)
+      );
 
-  ChannelTicket.send(TicketEmbed).then(async (msg) => {
-    msg.react("🎟️");
-  });
+    ChannelTicket.send(TicketEmbed).then(async (msg) => {
+      msg.react("🎟️");
+    });
+  }
   let ChannelValid = bot.channels.cache.get(`${config.ChanValidID}`);
-  ChannelValid.bulkDelete(100);
+  if (ChannelValid) {
+    ChannelValid.bulkDelete(100);
 
-  let mess = new Discord.MessageEmbed()
-    .setTitle("Info - Alliance No Limit")
-    .setColor(colours.orange)
-    .setDescription(
-      "**Info utile lors de l'arrivé:**\n" +
-        "🔸 - Pour des raisons de sécurité vous avez accès uniquement à ce channel dans un premier temps.\n" +
-        "🔸 - Lisez bien le règlement et cliquez sur la réaction pour avoir le rôle de validation qui vous donnera accès à un autre channel où vous pourrez parler avec les <@&683734990005075973> et les <@&683734915732340982> pour devenir officiellement un membre de notre Alliance ! \n" +
-        "🔸 - Bonne lecture et à bientôt dans le chat des membres."
-    )
-    .setFooter(`No Limit - Info `, bot.user.displayAvatarURL());
-  ChannelValid.send(mess);
+    let mess = new Discord.MessageEmbed()
+      .setTitle("Info - Alliance No Limit")
+      .setColor(colours.orange)
+      .setDescription(
+        "**Info utile lors de l'arrivé:**\n" +
+          "🔸 - Pour des raisons de sécurité vous avez accès uniquement à ce channel dans un premier temps.\n" +
+          "🔸 - Lisez bien le règlement et cliquez sur la réaction pour avoir le rôle de validation qui vous donnera accès à un autre channel où vous pourrez parler avec les <@&683734990005075973> et les <@&683734915732340982> pour devenir officiellement un membre de notre Alliance ! \n" +
+          "🔸 - Bonne lecture et à bientôt dans le chat des membres."
+      )
+      .setFooter(`No Limit - Info `, bot.user.displayAvatarURL());
+    ChannelValid.send(mess);
 
-  let RolesEmbed = new Discord.MessageEmbed()
-    .setTitle("Règlement - Alliance No Limit")
-    .setColor("#2ac075")
-    .setDescription(
-      "**Règles:**\n" +
-        ":small_orange_diamond: - Pas de NSFW, de racisme, de sexisme, de harcèlement.\n" +
-        ":small_orange_diamond: - Évitez de spam, quel que soit le channel.\n" +
-        ":small_orange_diamond: - Les modificateurs de voix sont interdits.\n" +
-        ":small_orange_diamond: - Publicité interdite pour les serveurs discord.\n" +
-        ":small_orange_diamond: - Pas de liens vers des sites douteux / inconnus.\n" +
-        ":small_orange_diamond: - Évitez tout sujet polémique. (religion, politique...)\n\n" +
-        "**Infos:**\n" +
-        ":small_orange_diamond: - Prêtez attention à la description des channels.\n" +
-        ":small_orange_diamond: - Si quelqu'un enfreint ces règles, pingez <@&698301852810477599>.\n" +
-        ":small_orange_diamond: - Les Modérateurs auront toujours le dernier mot.\n" +
-        ":pushpin: - Utilise Ctrl + P pour voir les messages épinglés.\n\n" +
-        ":white_check_mark: Pour valider votre lecture de ce règlement cliquez sur <:Validation:702767205137252384>.\n" +
-        "Vous serez ainsi compter comme personne en cours de validation soit attentif au #Vérification c'est ici qu'on vous contactera pour valider ta candidature. Merci aux membres de ne pas réagir ici."
-    )
-    .setFooter(`No Limit - Validation `, bot.user.displayAvatarURL());
-  ChannelValid.send(RolesEmbed).then(async (msg) => {
-    msg.react(`${config.TestValidID}`);
-  });
+    let RolesEmbed = new Discord.MessageEmbed()
+      .setTitle("Règlement - Alliance No Limit")
+      .setColor("#2ac075")
+      .setDescription(
+        "**Règles:**\n" +
+          ":small_orange_diamond: - Pas de NSFW, de racisme, de sexisme, de harcèlement.\n" +
+          ":small_orange_diamond: - Évitez de spam, quel que soit le channel.\n" +
+          ":small_orange_diamond: - Les modificateurs de voix sont interdits.\n" +
+          ":small_orange_diamond: - Publicité interdite pour les serveurs discord.\n" +
+          ":small_orange_diamond: - Pas de liens vers des sites douteux / inconnus.\n" +
+          ":small_orange_diamond: - Évitez tout sujet polémique. (religion, politique...)\n\n" +
+          "**Infos:**\n" +
+          ":small_orange_diamond: - Prêtez attention à la description des channels.\n" +
+          ":small_orange_diamond: - Si quelqu'un enfreint ces règles, pingez <@&698301852810477599>.\n" +
+          ":small_orange_diamond: - Les Modérateurs auront toujours le dernier mot.\n" +
+          ":pushpin: - Utilise Ctrl + P pour voir les messages épinglés.\n\n" +
+          ":white_check_mark: Pour valider votre lecture de ce règlement cliquez sur <:Validation:702767205137252384>.\n" +
+          "Vous serez ainsi compter comme personne en cours de validation soit attentif au #Vérification c'est ici qu'on vous contactera pour valider ta candidature. Merci aux membres de ne pas réagir ici."
+      )
+      .setFooter(`No Limit - Validation `, bot.user.displayAvatarURL());
+    ChannelValid.send(RolesEmbed).then(async (msg) => {
+      msg.react(`${config.TestValidID}`);
+    });
+  }
 });
 
 bot.on("message", async (message) => {
