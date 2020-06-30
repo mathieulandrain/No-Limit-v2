@@ -4,6 +4,9 @@ const emotes = require("../assets/json/emotes.json");
 const colours = require("../assets/json/colours.json");
 
 module.exports = async (bot, messages) => {
+  let logchannel = bot.guilds.cache
+    .get(messages.first().guild.id)
+    .channels.cache.find((c) => c.name === "logs");
   const fetchGuildAuditLogs = await messages.first().guild.fetchAuditLogs({
     limit: 1,
     type: "MESSAGE_BULK_DELETE",
@@ -28,5 +31,6 @@ module.exports = async (bot, messages) => {
     .setFooter("Messages supprimés ", bot.user.avatarURL("png", true))
     .setTimestamp();
 
-  bot.channels.cache.get(`${logchanID}`).send(embed);
+  logchannel.send(embed);
+  console.log(messages);
 };

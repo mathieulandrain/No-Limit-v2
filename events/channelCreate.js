@@ -4,6 +4,7 @@ const emotes = require("../assets/json/emotes.json");
 const colours = require("../assets/json/colours.json");
 
 module.exports = async (bot, channel) => {
+  let logchannel = channel.guild.channels.cache.find((c) => c.name === "logs");
   const fetchGuildAuditLogs = await channel.guild.fetchAuditLogs({
     limit: 1,
     type: "CHANNEL_CREATE",
@@ -22,5 +23,5 @@ module.exports = async (bot, channel) => {
     .setTimestamp()
     .setFooter(bot.user.username, bot.user.displayAvatarURL());
 
-  bot.channels.cache.get(`${logchanID}`).send(embed);
+  logchannel.send(embed);
 };

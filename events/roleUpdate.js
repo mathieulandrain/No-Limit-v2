@@ -4,7 +4,7 @@ const emotes = require("../assets/json/emotes.json");
 const colours = require("../assets/json/colours.json");
 
 module.exports = async (bot, oldRole, newRole) => {
-  let logchannel = bot.channels.cache.get(`${logchanID}`);
+  let logchannel = oldRole.guild.channels.cache.find((c) => c.name === "logs");
 
   const fetchGuildAuditLogs = await oldRole.guild.fetchAuditLogs({
     limit: 1,

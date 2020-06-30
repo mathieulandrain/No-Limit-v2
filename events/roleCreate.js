@@ -4,6 +4,7 @@ const emotes = require("../assets/json/emotes.json");
 const colours = require("../assets/json/colours.json");
 
 module.exports = async (bot, role) => {
+  let logchannel = role.guild.channels.cache.find((c) => c.name === "logs");
   const fetchGuildAuditLogs = await role.guild.fetchAuditLogs({
     limit: 1,
     type: "ROLE_CREATE",
@@ -25,5 +26,5 @@ module.exports = async (bot, role) => {
     .setFooter("Role créé ", bot.user.avatarURL("png", true))
     .setTimestamp();
 
-  bot.channels.cache.get(`${logchanID}`).send(embed);
+  logchannel.send(embed);
 };

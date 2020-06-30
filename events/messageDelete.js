@@ -4,7 +4,7 @@ const emotes = require("../assets/json/emotes.json");
 const colours = require("../assets/json/colours.json");
 
 module.exports = async (bot, message) => {
-  let logchannel = bot.channels.cache.get(logchanID);
+  let logchannel = message.guild.channels.cache.find((c) => c.name === "logs");
   if (!logchannel) return;
 
   const fetchedLogs = await message.guild.fetchAuditLogs({

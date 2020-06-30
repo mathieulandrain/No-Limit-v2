@@ -6,6 +6,10 @@ const colours = require("../assets/json/colours.json");
 module.exports = async (bot, oldChannel, newChannel) => {
   let liste = [config.memberCountChannelID, config.utipchanID];
   if (liste.includes(newChannel.id) || liste.includes(oldChannel.id)) return;
+  if (oldChannel.name === newChannel.name) return;
+  let logchannel = oldChannel.guild.channels.cache.find(
+    (c) => c.name === "logs"
+  );
   const fetchGuildAuditLogs = await oldChannel.guild.fetchAuditLogs({
     limit: 1,
     type: "CHANNEL_UPDATE",
@@ -17,6 +21,7 @@ module.exports = async (bot, oldChannel, newChannel) => {
 
   const embed = new MessageEmbed()
     .setAuthor(bot.user.username, bot.user.displayAvatarURL())
+    .setThumbnail(oldChannel.guild.iconURL())
     .setColor(colours.orange)
     .setDescription(
       `${emotes.update} - Modification du salon <#${newChannel.id}>\nAnciennement \`\`#${oldChannel.name}\`\` modifié par <@${executor.id}>`
@@ -24,5 +29,5 @@ module.exports = async (bot, oldChannel, newChannel) => {
     .setTimestamp()
     .setFooter(bot.user.username, bot.user.displayAvatarURL());
 
-  bot.channels.cache.get(`${config.logchanID}`).send(embed);
+  logchannel.send(embed);
 };

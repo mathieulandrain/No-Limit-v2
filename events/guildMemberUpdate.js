@@ -13,7 +13,9 @@ module.exports = async (bot, oldMember, newMember) => {
   // console.log(latestMemberRoleUpdate);
   const { executor } = latestMemberRoleUpdate;
 
-  let logchannel = bot.channels.cache.get(logchanID);
+  let logchannel = oldMember.guild.channels.cache.find(
+    (c) => c.name === "logs"
+  );
   if (!logchannel) return;
 
   if (oldMember.nickname !== newMember.nickname) {

@@ -4,6 +4,9 @@ const emotes = require("../assets/json/emotes.json");
 const colours = require("../assets/json/colours.json");
 
 module.exports = async (bot, oldMessage, newMessage) => {
+  let logchannel = oldMessage.guild.channels.cache.find(
+    (c) => c.name === "logs"
+  );
   if (oldMessage.author.bot || oldMessage.content == newMessage.content) return;
   const embed = new MessageEmbed()
     .setAuthor(bot.user.username, bot.user.displayAvatarURL())
@@ -19,5 +22,5 @@ module.exports = async (bot, oldMessage, newMessage) => {
       oldMessage.author.displayAvatarURL()
     );
 
-  bot.channels.cache.get(`${logchanID}`).send(embed);
+  logchannel.send(embed);
 };

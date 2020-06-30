@@ -4,6 +4,7 @@ const emotes = require("../assets/json/emotes.json");
 const colours = require("../assets/json/colours.json");
 
 module.exports = (bot, member) => {
+  let logchannel = member.guild.channels.cache.find((c) => c.name === "logs");
   const embed = new MessageEmbed()
     .setAuthor(`${member.displayName}`, bot.user.displayAvatarURL())
     .setThumbnail(member.user.displayAvatarURL())
@@ -14,5 +15,5 @@ module.exports = (bot, member) => {
     .setFooter("Un utilisateur a quitté")
     .setTimestamp();
 
-  bot.channels.cache.get(`${logchanID}`).send(embed);
+  logchannel.send(embed);
 };

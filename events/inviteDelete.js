@@ -4,6 +4,7 @@ const emotes = require("../assets/json/emotes.json");
 const colours = require("../assets/json/colours.json");
 
 module.exports = async (bot, invite) => {
+  let logchannel = invite.guild.channels.cache.find((c) => c.name === "logs");
   const fetchGuildAuditLogs = await invite.guild.fetchAuditLogs({
     limit: 1,
     type: "INVITE_DELETE",
@@ -26,5 +27,5 @@ module.exports = async (bot, invite) => {
     .setFooter("Invitation supprimée ", bot.user.avatarURL("png", true))
     .setTimestamp();
 
-  bot.channels.cache.get(`${logchanID}`).send(embed);
+  logchannel.send(embed);
 };
