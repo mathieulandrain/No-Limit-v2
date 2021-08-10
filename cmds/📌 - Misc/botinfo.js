@@ -57,7 +57,7 @@ module.exports.run = (bot, message, args) => {
 
 module.exports.help = {
   name: "botinfo",
-  aliases: ["botinfo"],
+  aliases: ["bot"],
   category: "📌 - misc",
   description: "Renvoie les infos du bot",
   usage: "",
